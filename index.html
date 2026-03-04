@@ -439,17 +439,28 @@
     function handleSubmit() {
       const email = document.getElementById('email-input').value;
       if (!email || !email.includes('@')) {
-        document.getElementById('email-input').style.borderBottom = '1px solid rgba(255,80,80,0.4)';
+        document.getElementById('email-input').style.outline = '1px solid rgba(255,80,80,0.4)';
         return;
       }
-      // Hide form, show success
-      document.querySelector('.form-row').style.display = 'none';
-      document.querySelector('.form-note').style.display = 'none';
-      document.querySelector('.form-label').style.display = 'none';
-      document.getElementById('success-msg').style.display = 'block';
 
-      // In production, send to your backend / Mailchimp here
-      console.log('Waitlist signup:', email);
+      const url = 'https://life.us17.list-manage.com/subscribe/post?u=59bb1e9595ed87e625615d292&id=e0222e83fa&f_id=00cfe8e3f0';
+      const data = new FormData();
+      data.append('EMAIL', email);
+      data.append('b_59bb1e9595ed87e625615d292_e0222e83fa', ''); // honeypot field
+
+      fetch(url, {
+        method: 'POST',
+        body: data,
+        mode: 'no-cors',
+      }).then(() => {
+        document.querySelector('.form-row').style.display = 'none';
+        document.querySelector('.form-note').style.display = 'none';
+        document.querySelector('.form-label').style.display = 'none';
+        document.getElementById('success-msg').style.display = 'block';
+      }).catch(() => {
+        document.getElementById('success-msg').style.display = 'block';
+        document.getElementById('success-msg').textContent = '⚠️ Something went wrong. Try again!';
+      });
     }
 
     // Allow Enter key
