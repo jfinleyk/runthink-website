@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RunThink — Think Better. Run Stronger.</title>
+  <meta name="description" content="A daily mindset app for runners, walkers, rollers, and cyclists. Coming soon to iOS."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --forest-deep: #0a120c;
+      --forest-mid: #162218;
+      --forest-card: #1c2e1e;
+      --green-primary: #7db87a;
+      --green-dark: #5a9957;
+      --green-darker: #3d6645;
+      --cream: #f5efe6;
+      --cream-dim: rgba(245,239,230,0.6);
+      --cream-faint: rgba(245,239,230,0.15);
+      --green-glow: rgba(125,184,122,0.08);
+      --green-border: rgba(125,184,122,0.15);
+      --green-muted: rgba(125,184,122,0.35);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--forest-deep);
+      color: var(--cream);
+      font-family: 'Crimson Pro', Georgia, serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Grain overlay ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ── Mountain background ── */
+    .mountain-bg {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 55vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ── Layout ── */
+    .page {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 24px 120px;
+      text-align: center;
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes sunRise {
+      from { opacity: 0; transform: translateY(12px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+
+    /* ── Logo mark ── */
+    .logo-mark {
+      animation: sunRise 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+      margin-bottom: 32px;
+    }
+
+    .logo-mark svg {
+      filter: drop-shadow(0 8px 32px rgba(125,184,122,0.2));
+    }
+
+    /* ── Wordmark ── */
+    .wordmark {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(52px, 10vw, 88px);
+      letter-spacing: -2px;
+      line-height: 1;
+      animation: fadeUp 1s 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+      margin-bottom: 20px;
+    }
+
+    .wordmark .run { color: var(--cream); }
+    .wordmark .think { color: var(--green-primary); }
+
+    /* ── Eyebrow ── */
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 5px;
+      color: var(--green-muted);
+      text-transform: uppercase;
+      font-family: 'Crimson Pro', serif;
+      font-weight: 300;
+      animation: fadeUp 1s 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+      margin-bottom: 40px;
+    }
+
+    /* ── Tagline ── */
+    .tagline {
+      font-size: clamp(20px, 4vw, 28px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--cream-dim);
+      line-height: 1.5;
+      max-width: 560px;
+      animation: fadeUp 1s 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+      margin-bottom: 16px;
+    }
+
+    .tagline .accent {
+      color: var(--green-primary);
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    /* ── Grandfather quote ── */
+    .quote {
+      font-size: 15px;
+      color: rgba(125,184,122,0.4);
+      font-style: italic;
+      letter-spacing: 0.5px;
+      animation: fadeUp 1s 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+      margin-bottom: 56px;
+    }
+
+    /* ── Divider ── */
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--green-border);
+      margin: 0 auto 48px;
+      animation: fadeUp 1s 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    /* ── Coming soon badge ── */
+    .coming-soon {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green-glow);
+      border: 1px solid var(--green-border);
+      border-radius: 100px;
+      padding: 8px 20px;
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--green-primary);
+      font-family: 'Crimson Pro', serif;
+      animation: fadeUp 1s 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+      margin-bottom: 32px;
+    }
+
+    .coming-soon .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green-primary);
+      animation: pulse 2s infinite;
+    }
+
+    /* ── Email form ── */
+    .form-wrap {
+      animation: fadeUp 1s 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+      width: 100%;
+      max-width: 440px;
+    }
+
+    .form-label {
+      font-size: 13px;
+      color: var(--green-muted);
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 8px;
+      background: rgba(28,46,30,0.6);
+      border: 1px solid var(--green-border);
+      border-radius: 16px;
+      padding: 6px 6px 6px 20px;
+      backdrop-filter: blur(12px);
+      transition: border-color 0.2s;
+    }
+
+    .form-row:focus-within {
+      border-color: rgba(125,184,122,0.4);
+      box-shadow: 0 0 0 4px rgba(125,184,122,0.06);
+    }
+
+    .form-row input {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      color: var(--cream);
+      font-family: 'Crimson Pro', serif;
+      font-size: 16px;
+      padding: 6px 0;
+    }
+
+    .form-row input::placeholder { color: rgba(125,184,122,0.25); }
+
+    .form-row button {
+      background: linear-gradient(135deg, var(--green-dark), var(--green-primary));
+      border: none;
+      border-radius: 11px;
+      color: var(--forest-deep);
+      font-family: 'Crimson Pro', serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      padding: 12px 22px;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+      white-space: nowrap;
+    }
+
+    .form-row button:hover { opacity: 0.9; transform: scale(0.98); }
+    .form-row button:active { transform: scale(0.96); }
+
+    .form-note {
+      font-size: 12px;
+      color: rgba(125,184,122,0.2);
+      margin-top: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── Features strip ── */
+    .features {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 56px;
+      animation: fadeUp 1s 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .feature-pill {
+      background: var(--green-glow);
+      border: 1px solid var(--green-border);
+      border-radius: 100px;
+      padding: 8px 16px;
+      font-size: 13px;
+      color: var(--green-muted);
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+      background: linear-gradient(to top, rgba(10,18,12,0.9), transparent);
+    }
+
+    .footer-left {
+      font-size: 11px;
+      color: rgba(125,184,122,0.2);
+      letter-spacing: 1px;
+    }
+
+    .footer-right {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-right a {
+      font-size: 11px;
+      color: rgba(125,184,122,0.2);
+      text-decoration: none;
+      letter-spacing: 1px;
+      transition: color 0.2s;
+    }
+
+    .footer-right a:hover { color: var(--green-muted); }
+
+    /* ── Success state ── */
+    .success-msg {
+      display: none;
+      color: var(--green-primary);
+      font-size: 15px;
+      font-style: italic;
+      margin-top: 16px;
+      animation: fadeUp 0.5s both;
+    }
+
+    @media (max-width: 480px) {
+      .form-row { flex-direction: column; padding: 12px 16px; }
+      .form-row button { width: 100%; padding: 14px; }
+      .footer { flex-direction: column; gap: 8px; text-align: center; }
+      .footer-right { gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Mountain SVG background -->
+  <div class="mountain-bg">
+    <svg viewBox="0 0 1440 400" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+      <!-- Far mountains -->
+      <path d="M0 400 L180 180 L360 400Z" fill="#111a13" opacity="0.6"/>
+      <path d="M200 400 L420 120 L640 400Z" fill="#111a13" opacity="0.5"/>
+      <path d="M800 400 L980 160 L1160 400Z" fill="#111a13" opacity="0.5"/>
+      <path d="M1100 400 L1280 200 L1440 400Z" fill="#111a13" opacity="0.6"/>
+      <!-- Mid mountains -->
+      <path d="M100 400 L340 100 L580 400Z" fill="#162218" opacity="0.8"/>
+      <path d="M600 400 L800 80 L1000 400Z" fill="#162218" opacity="0.9"/>
+      <path d="M900 400 L1140 140 L1380 400Z" fill="#162218" opacity="0.7"/>
+      <!-- Snow caps -->
+      <path d="M340 100 L310 160 L340 148 L370 160Z" fill="#3d6645" opacity="0.6"/>
+      <path d="M800 80 L768 148 L800 136 L832 148Z" fill="#3d6645" opacity="0.7"/>
+      <path d="M1140 140 L1112 196 L1140 184 L1168 196Z" fill="#3d6645" opacity="0.5"/>
+      <!-- Foreground hills -->
+      <path d="M0 320 Q180 260 360 320 Q540 380 720 320 Q900 260 1080 320 Q1260 380 1440 320 L1440 400 L0 400Z" fill="#1c2e1e" opacity="0.8"/>
+      <path d="M0 370 Q240 340 480 370 Q720 400 960 370 Q1200 340 1440 370 L1440 400 L0 400Z" fill="#162218"/>
+    </svg>
+  </div>
+
+  <!-- Main page -->
+  <main class="page">
+
+    <!-- Logo mark -->
+    <div class="logo-mark">
+      <svg width="80" height="80" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="32" y1="8" x2="32" y2="2" stroke="#7db87a" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+        <line x1="42" y1="10" x2="45" y2="5" stroke="#7db87a" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+        <line x1="50" y1="16" x2="54" y2="12" stroke="#7db87a" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
+        <line x1="22" y1="10" x2="19" y2="5" stroke="#7db87a" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+        <line x1="14" y1="16" x2="10" y2="12" stroke="#7db87a" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
+        <line x1="54" y1="26" x2="60" y2="24" stroke="#7db87a" stroke-width="2" stroke-linecap="round" opacity="0.2"/>
+        <line x1="10" y1="26" x2="4" y2="24" stroke="#7db87a" stroke-width="2" stroke-linecap="round" opacity="0.2"/>
+        <path d="M18 38 A14 14 0 0 1 46 38" fill="none" stroke="#7db87a" stroke-width="2.5" opacity="0.6"/>
+        <circle cx="32" cy="38" r="8" fill="#7db87a" opacity="0.15"/>
+        <path d="M2 46 L20 22 L38 46Z" fill="#2a4a2c" opacity="0.8"/>
+        <path d="M24 46 L44 14 L64 46Z" fill="#3d6645"/>
+        <path d="M44 14 L38 26 L44 24 L50 26Z" fill="#7db87a" opacity="0.9"/>
+        <rect x="0" y="46" width="64" height="18" fill="#0a120c"/>
+        <path d="M0 52 Q16 44 32 52 Q48 60 64 52 L64 64 L0 64Z" fill="#1c2e1e"/>
+      </svg>
+    </div>
+
+    <!-- Wordmark -->
+    <h1 class="wordmark">
+      <span class="run">Run</span><span class="think">Think</span>
+    </h1>
+
+    <p class="eyebrow">Coming soon to iOS</p>
+
+    <!-- Tagline -->
+    <p class="tagline">
+      A daily mindset companion for <span class="accent">runners, walkers, rollers & cyclists.</span><br/>
+      One question. Every morning. Your community.
+    </p>
+
+    <p class="quote">"Hey, hey what a day." 🌄</p>
+
+    <div class="divider"></div>
+
+    <!-- Coming soon badge -->
+    <div class="coming-soon">
+      <span class="dot"></span>
+      In development
+    </div>
+
+    <!-- Email waitlist -->
+    <div class="form-wrap">
+      <span class="form-label">Get notified when we launch</span>
+      <div class="form-row">
+        <input type="email" id="email-input" placeholder="your@email.com" autocomplete="email"/>
+        <button onclick="handleSubmit()">Notify me</button>
+      </div>
+      <p class="form-note">No spam. Just a note when we're ready. We promise.</p>
+      <p class="success-msg" id="success-msg">🌄 You're on the list. Hey, hey what a day!</p>
+    </div>
+
+    <!-- Feature pills -->
+    <div class="features">
+      <div class="feature-pill">🧠 Daily mindset prompts</div>
+      <div class="feature-pill">💬 Community forum</div>
+      <div class="feature-pill">📤 Share your progress</div>
+      <div class="feature-pill">🏔️ Built for every pace</div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span class="footer-left">© 2026 Hey Hey What A Day LLC</span>
+    <div class="footer-right">
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="mailto:heyheywhatadayllc@gmail.com">Support</a>
+    </div>
+  </footer>
+
+  <script>
+    function handleSubmit() {
+      const email = document.getElementById('email-input').value;
+      if (!email || !email.includes('@')) {
+        document.getElementById('email-input').style.borderBottom = '1px solid rgba(255,80,80,0.4)';
+        return;
+      }
+      // Hide form, show success
+      document.querySelector('.form-row').style.display = 'none';
+      document.querySelector('.form-note').style.display = 'none';
+      document.querySelector('.form-label').style.display = 'none';
+      document.getElementById('success-msg').style.display = 'block';
+
+      // In production, send to your backend / Mailchimp here
+      console.log('Waitlist signup:', email);
+    }
+
+    // Allow Enter key
+    document.getElementById('email-input').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') handleSubmit();
+    });
+  </script>
+
+</body>
+</html>
