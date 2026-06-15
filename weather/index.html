@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>RunThink · Weather near you</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest:#0d1a10;
+    --card:#1a2e1e;
+    --cream:#f5efe6;
+    --green:#5a9957;
+    --lgreen:#7db87a;
+    --dim: rgba(245,239,230,0.62);
+    --line: rgba(125,184,122,0.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    background:var(--forest);
+    color:var(--cream);
+    font-family:"Inter",system-ui,sans-serif;
+    min-height:100vh;
+    line-height:1.5;
+    overflow-x:hidden;
+  }
+  /* ambient atmosphere */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(60% 50% at 50% -5%, rgba(125,184,122,0.10), transparent 70%),
+      radial-gradient(40% 30% at 90% 100%, rgba(90,153,87,0.08), transparent 70%);
+  }
+  .wrap{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:48px 24px 80px}
+
+  header.brand{display:flex;align-items:center;gap:10px;margin-bottom:56px}
+  .mark{width:26px;height:26px;border-radius:50%;
+    background:conic-gradient(from 220deg,var(--green),var(--lgreen),var(--green));
+    box-shadow:0 0 0 4px rgba(125,184,122,0.10)}
+  .brand b{font-weight:600;letter-spacing:.2px;font-size:15px}
+  .brand span{color:var(--dim);font-size:15px}
+
+  .lede{font-family:"Fraunces",serif;font-weight:400;font-size:clamp(28px,5vw,40px);
+    line-height:1.15;letter-spacing:-0.01em;max-width:18ch;margin-bottom:14px}
+  .lede em{font-style:italic;color:var(--lgreen)}
+  .sub{color:var(--dim);font-size:16px;max-width:46ch;margin-bottom:36px}
+
+  /* input row */
+  .controls{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+  .field{flex:1 1 240px;display:flex;align-items:center;gap:10px;
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:0 14px;height:54px}
+  .field input{flex:1;background:none;border:0;outline:0;color:var(--cream);
+    font-family:inherit;font-size:16px}
+  .field input::placeholder{color:rgba(245,239,230,0.4)}
+  .field svg{flex:none;opacity:.7}
+  button{font-family:inherit;cursor:pointer;border:0}
+  .go{background:var(--green);color:var(--forest);font-weight:600;font-size:16px;
+    border-radius:14px;padding:0 22px;height:54px;transition:background .15s, transform .05s}
+  .go:hover{background:var(--lgreen)}
+  .go:active{transform:translateY(1px)}
+  .go:disabled{opacity:.5;cursor:default}
+  .locate{background:var(--card);color:var(--cream);border:1px solid var(--line);
+    border-radius:14px;height:54px;width:54px;display:grid;place-items:center;transition:border-color .15s}
+  .locate:hover{border-color:var(--lgreen)}
+
+  .activity{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:40px}
+  .chip{background:transparent;border:1px solid var(--line);color:var(--dim);
+    border-radius:999px;padding:7px 15px;font-size:14px;transition:.15s}
+  .chip[aria-pressed="true"]{background:rgba(125,184,122,0.14);color:var(--cream);border-color:var(--lgreen)}
+  .chip:hover{color:var(--cream)}
+
+  /* result card */
+  .card{background:var(--card);border:1px solid var(--line);border-radius:24px;
+    padding:36px 32px;position:relative;overflow:hidden;
+    min-height:240px;display:flex;flex-direction:column;justify-content:center}
+  .card.idle{align-items:center;text-align:center;color:var(--dim)}
+  .card.idle p{max-width:30ch;font-size:15px}
+
+  .place{color:var(--lgreen);font-size:14px;font-weight:500;letter-spacing:.3px;
+    text-transform:uppercase;margin-bottom:6px}
+  .frame{font-family:"Fraunces",serif;font-size:clamp(22px,4vw,30px);
+    line-height:1.2;letter-spacing:-0.01em;margin-bottom:20px;max-width:20ch}
+  .reading{display:flex;align-items:flex-start;gap:6px}
+  .temp{font-family:"Fraunces",serif;font-weight:500;
+    font-size:clamp(76px,18vw,128px);line-height:.85;letter-spacing:-0.03em}
+  .deg{font-family:"Fraunces",serif;font-size:clamp(28px,6vw,44px);margin-top:8px;color:var(--lgreen)}
+  .meta{margin-top:22px;color:var(--dim);font-size:14px;display:flex;flex-wrap:wrap;gap:6px 16px}
+  .meta b{color:var(--cream);font-weight:500}
+
+  /* per-source rows: each public reading feeding the blend */
+  .sources{margin-top:22px;display:flex;flex-direction:column;gap:1px;
+    border-top:1px solid var(--line);padding-top:14px}
+  .srow{display:flex;align-items:center;gap:10px;padding:7px 0;
+    animation:fade .4s ease both}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .sdot{width:8px;height:8px;border-radius:50%;background:var(--lgreen);flex:none}
+  .sname{font-weight:500;font-size:14.5px}
+  .slabel{color:var(--dim);font-size:13px;flex:1;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .stemp{font-family:"Fraunces",serif;font-size:18px;color:var(--cream)}
+  .srow.trimmed{opacity:.5}
+  .srow.trimmed .sdot{background:transparent;border:1px solid rgba(245,239,230,0.4)}
+  .srow.trimmed .stemp{text-decoration:line-through;text-decoration-color:rgba(245,239,230,0.4)}
+
+  .err{color:#e8b4a0;font-size:15px}
+  .spin{width:26px;height:26px;border-radius:50%;border:2px solid var(--line);
+    border-top-color:var(--lgreen);animation:rot .7s linear infinite;margin:0 auto}
+  @keyframes rot{to{transform:rotate(360deg)}}
+
+  .foot{margin-top:28px;color:var(--dim);font-size:13px;line-height:1.6}
+
+  @media (max-width:520px){
+    .wrap{padding:32px 18px 60px}
+    header.brand{margin-bottom:40px}
+    .card{padding:28px 22px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .dot{animation:none}.spin{animation-duration:1.4s}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="brand">
+    <div class="mark"></div>
+    <b>RunThink</b><span>· weather</span>
+  </header>
+
+  <h1 class="lede">The temperature where you actually <em>are</em>.</h1>
+  <p class="sub">Official stations can sit miles away. We pull from several free public sources at once, blend the readings, and give you an honest number for your activity right where you are.</p>
+
+  <div class="controls">
+    <div class="field">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+      <input id="loc" type="text" placeholder="Zip code or city" autocomplete="postal-code" />
+    </div>
+    <button class="locate" id="geo" title="Use my location" aria-label="Use my location">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
+    </button>
+    <button class="go" id="go">Check it</button>
+  </div>
+
+  <div class="activity" id="activity" role="group" aria-label="Activity type">
+    <button class="chip" data-act="runner" aria-pressed="true">Runner</button>
+    <button class="chip" data-act="cyclist" aria-pressed="false">Cyclist</button>
+    <button class="chip" data-act="swimmer" aria-pressed="false">Swimmer</button>
+    <button class="chip" data-act="golfer" aria-pressed="false">Golfer</button>
+    <button class="chip" data-act="walker" aria-pressed="false">Walker</button>
+    <button class="chip" data-act="roller" aria-pressed="false">Roller</button>
+  </div>
+
+  <section class="card idle" id="card" aria-live="polite">
+    <p>Enter a location or tap the target to read the stations near you.</p>
+  </section>
+
+  <p class="foot">Readings come from the National Weather Service, Open-Meteo, OpenWeather, and Visual Crossing. We show every source that reports and blend them; with four or more we drop the single highest and lowest first. Weather data by OpenWeather and Visual Crossing.</p>
+</div>
+
+<script>
+const API = "/api/weather"; // your serverless route
+
+let activity = "runner";
+const card = document.getElementById("card");
+const input = document.getElementById("loc");
+
+document.getElementById("activity").addEventListener("click", e=>{
+  const b = e.target.closest(".chip"); if(!b) return;
+  document.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed","false"));
+  b.setAttribute("aria-pressed","true");
+  activity = b.dataset.act;
+  if(lastData) render(lastData, lastPlace);
+});
+
+document.getElementById("go").addEventListener("click", ()=>{
+  const v = input.value.trim();
+  if(!v){ input.focus(); return; }
+  run({ location: v }, v);
+});
+input.addEventListener("keydown", e=>{ if(e.key==="Enter") document.getElementById("go").click(); });
+
+document.getElementById("geo").addEventListener("click", ()=>{
+  if(!navigator.geolocation){ showError("Your browser can't share location. Type a zip instead."); return; }
+  loading("Finding stations near you");
+  navigator.geolocation.getCurrentPosition(
+    pos=> run({ lat: pos.coords.latitude, lon: pos.coords.longitude }, "your location"),
+    ()=> showError("Couldn't get your location. Type a zip or city instead.")
+  );
+});
+
+let lastData=null, lastPlace="";
+
+function loading(msg){
+  card.className="card idle";
+  card.innerHTML = `<div class="spin"></div><p style="margin-top:16px">${msg}…</p>`;
+}
+function showError(msg){
+  card.className="card";
+  card.innerHTML = `<p class="err">${msg}</p>`;
+}
+
+async function run(params, placeLabel){
+  loading("Reading nearby stations");
+  document.getElementById("go").disabled = true;
+  try{
+    const qs = new URLSearchParams(params).toString();
+    const r = await fetch(`${API}?${qs}`);
+    const d = await r.json();
+    if(!r.ok) throw new Error(d.error || "Couldn't reach the stations");
+    lastData = d; lastPlace = placeLabel;
+    render(d, placeLabel);
+  }catch(err){
+    showError(err.message);
+  }finally{
+    document.getElementById("go").disabled = false;
+  }
+}
+
+// activity-aware framing
+function frame(temp, act){
+  const t = temp;
+  const ranges = {
+    runner:  [[ -99,32,"Cold out. Layer up before you run."],[32,45,"Crisp running weather. A long sleeve will do."],[45,62,"Just about perfect for a run."],[62,75,"Warm and good. Hydrate and go."],[75,85,"Hot. Take it easy and carry water."],[85,200,"Very hot. Early or late is smarter today."]],
+    cyclist: [[-99,38,"Chilly ride. Cover the hands and ears."],[38,55,"Cool and fast. Great riding air."],[55,75,"Ideal on the bike."],[75,86,"Warm ride. Keep the bottles full."],[86,200,"Hot for a long ride. Plan for shade."]],
+    swimmer: [[-99,60,"Cold for open water. Wetsuit weather."],[60,72,"Bracing but doable in the water."],[72,84,"Lovely for a swim."],[84,200,"Warm air, warm water. Go enjoy it."]],
+    golfer:  [[-99,40,"Bundle up for the front nine."],[40,58,"Cool round. Bring a layer."],[58,80,"Beautiful day for the course."],[80,200,"Hot on the fairway. Cart and water."]],
+    walker:  [[-99,35,"Cold walk. Hat and gloves."],[35,55,"Brisk and pleasant for a walk."],[55,80,"Lovely walking weather."],[80,200,"Warm stroll. Stick to the shade."]],
+    roller:  [[-99,40,"Cold for skating. Layer up."],[40,60,"Cool and smooth for a roll."],[60,82,"Great day to get rolling."],[82,200,"Hot pavement. Hydrate and go early."]],
+  };
+  const set = ranges[act] || ranges.runner;
+  for(const [lo,hi,msg] of set){ if(t>=lo && t<hi) return msg; }
+  return "Out there waiting for you.";
+}
+
+function render(d, placeLabel){
+  card.className="card";
+  const place = d.placeName || placeLabel;
+
+  // one row per source that reported, each showing its own reading
+  const rows = (d.sources || []).map((s, i) => `
+    <div class="srow${s.trimmed ? " trimmed" : ""}" style="animation-delay:${i*70}ms">
+      <span class="sdot"></span>
+      <span class="sname">${s.source}</span>
+      <span class="slabel">${s.label}${s.trimmed ? " · dropped as outlier" : ""}</span>
+      <span class="stemp">${s.temp}°</span>
+    </div>`).join("");
+
+  const trimmed = (d.sources || []).some(s => s.trimmed);
+  const blendLine = d.blended
+    ? `<span>Blended from <b>${d.sourcesUsed}</b> of <b>${d.sources.length}</b> public sources</span>`
+      + (trimmed ? `<span>high &amp; low dropped</span>` : "")
+    : `<span>From <b>1</b> public source</span>`;
+  const metaLine = blendLine + (d.cached ? `<span>cached</span>` : "");
+
+  card.innerHTML = `
+    <div class="place">${place}</div>
+    <div class="frame">${frame(d.temperature, activity)}</div>
+    <div class="reading">
+      <span class="temp">${d.temperature}</span>
+      <span class="deg">°F</span>
+    </div>
+    <div class="meta">${metaLine}</div>
+    ${rows ? `<div class="sources">${rows}</div>` : ""}
+  `;
+}
+</script>
+</body>
+</html>
