@@ -1,152 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RunThink Support</title>
-  <meta name="description" content="Get help with RunThink, the daily mental wellness app for runners, walkers, cyclists, swimmers, and golfers." />
-  <link rel="icon" href="/favicon.svg" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Support — RunThink</title>
+  <meta name="description" content="Get help with RunThink — account issues, Strava connection, notifications, forum, and feedback."/>
+  <link rel="canonical" href="https://runthink.app/support"/>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg"/>
+  <meta property="og:title" content="Support — RunThink"/>
+  <meta property="og:description" content="Get help with RunThink."/>
+  <meta property="og:image" content="https://runthink.app/og-image.png"/>
+  <meta property="og:url" content="https://runthink.app/support"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #0d1a10;
-      color: #f5efe6;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 32px 24px;
+    :root{
+      --forest:#0b160d;--cream:#eef3ec;--green:#5a9957;--lgreen:#8fc487;
+      --dim:rgba(238,243,236,.72);--faint:rgba(238,243,236,.45);--line:rgba(238,243,236,.12);
     }
-
-    .logo {
-      color: #7db87a;
-      font-size: 28px;
-      font-weight: 800;
-      letter-spacing: 4px;
-      margin-bottom: 48px;
-    }
-
-    .card {
-      background: rgba(245, 239, 230, 0.06);
-      border: 1px solid rgba(200, 230, 195, 0.18);
-      border-radius: 24px;
-      padding: 40px;
-      max-width: 480px;
-      width: 100%;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 22px;
-      font-weight: 700;
-      color: #f5efe6;
-      margin-bottom: 12px;
-    }
-
-    p {
-      color: rgba(245, 239, 230, 0.6);
-      font-size: 15px;
-      line-height: 1.7;
-      margin-bottom: 32px;
-    }
-
-    .divider {
-      width: 32px;
-      height: 2px;
-      background: rgba(125, 184, 122, 0.3);
-      border-radius: 2px;
-      margin: 0 auto 32px;
-    }
-
-    .contact-label {
-      color: #7db87a;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      margin-bottom: 10px;
-    }
-
-    .email-link {
-      color: #f5efe6;
-      font-size: 16px;
-      font-weight: 600;
-      text-decoration: none;
-      background: rgba(125, 184, 122, 0.08);
-      border: 1px solid rgba(125, 184, 122, 0.2);
-      border-radius: 12px;
-      padding: 14px 24px;
-      display: inline-block;
-      transition: background 0.2s;
-    }
-
-    .email-link:hover {
-      background: rgba(125, 184, 122, 0.15);
-    }
-
-    .topics {
-      margin-top: 32px;
-      text-align: left;
-    }
-
-    .topics-label {
-      color: #7db87a;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      margin-bottom: 14px;
-      text-align: center;
-    }
-
-    .topic-item {
-      color: rgba(245, 239, 230, 0.6);
-      font-size: 14px;
-      line-height: 1.6;
-      padding: 8px 0;
-      border-bottom: 1px solid rgba(200, 230, 195, 0.08);
-      display: flex;
-      gap: 10px;
-    }
-
-    .topic-item:last-child {
-      border-bottom: none;
-    }
-
-    footer {
-      margin-top: 48px;
-      color: rgba(125, 184, 122, 0.4);
-      font-size: 13px;
-      font-style: italic;
-    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    body{background:var(--forest);color:var(--cream);font-family:'Instrument Sans',system-ui,sans-serif;min-height:100vh;position:relative;overflow-x:hidden}
+    a{color:var(--lgreen)}a:hover{color:#b4d9ad}
+    .rings{position:absolute;top:-450px;right:-450px;pointer-events:none;z-index:0}
+    .rings circle{fill:none;stroke:var(--green);stroke-width:1.2}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+    header{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:30px 44px}
+    .brand{display:flex;align-items:center;gap:14px;text-decoration:none}
+    .brand img{width:44px;height:44px;border-radius:12px;display:block}
+    .brand span{font:400 26px 'DM Serif Display',serif;color:var(--cream)}
+    .btn{padding:11px 22px;border-radius:999px;background:var(--green);color:#0d1a10;font:600 14px 'Instrument Sans',sans-serif;text-decoration:none}
+    .btn:hover{background:var(--lgreen);color:#0d1a10}
+    main{position:relative;z-index:2;max-width:720px;margin:0 auto;padding:48px 24px 96px;animation:fadeUp .8s cubic-bezier(.2,.7,.2,1) both}
+    h1{font:400 46px/1.1 'DM Serif Display',serif;margin-bottom:12px}
+    .lede{font:400 17px/1.6 'Instrument Sans',sans-serif;color:var(--dim);margin-bottom:36px}
+    .email-card{display:flex;flex-direction:column;gap:8px;align-items:flex-start;
+      background:rgba(90,153,87,.1);border:1px solid rgba(90,153,87,.3);border-radius:16px;
+      padding:24px 28px;margin-bottom:36px}
+    .email-label{font:500 12px 'Instrument Sans',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--lgreen)}
+    .email-card a{font:600 18px 'Instrument Sans',sans-serif;color:var(--cream);text-decoration:none}
+    .email-card a:hover{color:var(--lgreen)}
+    .email-note{font:400 14px 'Instrument Sans',sans-serif;color:var(--faint)}
+    h2{font:400 24px 'DM Serif Display',serif;color:var(--lgreen);margin-bottom:16px}
+    .topics{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .topic{padding:18px 22px;border:1px solid var(--line);border-radius:14px;background:rgba(238,243,236,.03);
+      font:400 15px/1.5 'Instrument Sans',sans-serif;color:var(--dim)}
+    footer{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px;padding:26px}
+    .footer-links{display:flex;gap:28px}
+    .footer-links a{font:400 13px 'Instrument Sans',sans-serif;color:var(--faint);text-decoration:none}
+    .footer-links a:hover{color:var(--cream)}
+    .copyright{font:400 11px 'Instrument Sans',sans-serif;color:rgba(238,243,236,.3);letter-spacing:1px}
+    @media (max-width:560px){header{padding:22px 24px}h1{font-size:38px}.topics{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
-
-  <div class="logo">RunThink</div>
-
-  <div class="card">
+  <svg class="rings" width="900" height="900" viewBox="0 0 900 900" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="450" cy="450" r="160" stroke-opacity="0.28"/>
+    <circle cx="450" cy="450" r="260" stroke-opacity="0.2"/>
+    <circle cx="450" cy="450" r="360" stroke-opacity="0.13"/>
+    <circle cx="450" cy="450" r="445" stroke-opacity="0.07"/>
+  </svg>
+  <header>
+    <a href="/" class="brand"><img src="../favicon.svg" alt="RunThink logo"/><span>RunThink</span></a>
+    <a class="btn" href="/">Get the app</a>
+  </header>
+  <main>
     <h1>We're here to help</h1>
-    <p>Have a question, issue, or feedback about RunThink? Send us a message and we'll get back to you as soon as possible.</p>
+    <p class="lede">Have a question, issue, or feedback about RunThink? Send us a message and we'll get back to you as soon as possible.</p>
 
-    <div class="divider"></div>
-
-    <div class="contact-label">CONTACT SUPPORT</div>
-    <a class="email-link" href="mailto:heyheywhatadayllc@gmail.com">heyheywhatadayllc@gmail.com</a>
-
-    <div class="topics">
-      <div class="topics-label">COMMON TOPICS</div>
-      <div class="topic-item"><span>🔐</span> Account or login issues</div>
-      <div class="topic-item"><span>🟠</span> Strava connection help</div>
-      <div class="topic-item"><span>🔔</span> Notification settings</div>
-      <div class="topic-item"><span>🐇</span> Forum or community questions</div>
-      <div class="topic-item"><span>📓</span> Journal and privacy questions</div>
-      <div class="topic-item"><span>💬</span> General feedback or ideas</div>
+    <div class="email-card">
+      <span class="email-label">Contact support</span>
+      <a href="mailto:heyheywhatadayllc@gmail.com">heyheywhatadayllc@gmail.com</a>
+      <span class="email-note">We usually reply within a day.</span>
     </div>
-  </div>
 
-  <footer>Hey, hey what a day. 🌄</footer>
-
+    <h2>Common topics</h2>
+    <div class="topics">
+      <div class="topic">Account or login issues</div>
+      <div class="topic">Strava connection help</div>
+      <div class="topic">Notification settings</div>
+      <div class="topic">Forum or community questions</div>
+      <div class="topic">Journal and privacy questions</div>
+      <div class="topic">General feedback or ideas</div>
+    </div>
+  </main>
+  <footer>
+    <div class="footer-links">
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="/support">Support</a>
+      <a href="/weather">Weather</a>
+    </div>
+    <span class="copyright">© 2026 Hey Hey What A Day LLC</span>
+  </footer>
 </body>
 </html>
