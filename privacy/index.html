@@ -1,173 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Privacy Policy — RunThink</title>
+  <meta name="description" content="Privacy policy for the RunThink app."/>
+  <link rel="canonical" href="https://runthink.app/privacy"/>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg"/>
+  <meta property="og:title" content="Privacy Policy — RunThink"/>
+  <meta property="og:description" content="Privacy policy for the RunThink app."/>
+  <meta property="og:image" content="https://runthink.app/og-image.png"/>
+  <meta property="og:url" content="https://runthink.app/privacy"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #0d1a10;
-      --bg-grad: #1a3320;
-      --card: rgba(245, 239, 230, 0.04);
-      --border: rgba(200, 230, 195, 0.15);
-      --text: #f5efe6;
-      --text-soft: rgba(212, 201, 187, 0.85);
-      --accent: #7db87a;
-      --muted: rgba(125, 184, 122, 0.5);
+    :root{
+      --forest:#0b160d;--cream:#eef3ec;--green:#5a9957;--lgreen:#8fc487;
+      --dim:rgba(238,243,236,.72);--faint:rgba(238,243,236,.45);--line:rgba(238,243,236,.12);
     }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: linear-gradient(180deg, var(--bg-grad) 0%, var(--bg) 55%) fixed;
-      color: var(--text-soft);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.65;
-      font-size: 16px;
-    }
-    .wrap {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 56px 24px 96px;
-    }
-    h1 {
-      color: var(--text);
-      font-size: 32px;
-      font-weight: 700;
-      margin: 0 0 6px;
-    }
-    .updated {
-      color: var(--muted);
-      font-size: 13px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin: 0 0 28px;
-    }
-    .intro {
-      color: var(--text-soft);
-      font-style: italic;
-      margin: 0 0 32px;
-    }
-    h2 {
-      color: var(--accent);
-      font-size: 15px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin: 36px 0 12px;
-    }
-    p { margin: 0 0 16px; }
-    ul { margin: 0 0 16px; padding-left: 20px; }
-    li { margin: 0 0 10px; }
-    strong { color: var(--text); font-weight: 700; }
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .divider {
-      width: 40px;
-      height: 2px;
-      background: var(--muted);
-      border: none;
-      border-radius: 2px;
-      margin: 48px auto 20px;
-    }
-    .footer {
-      text-align: center;
-      color: var(--accent);
-      font-style: italic;
-      opacity: 0.6;
-      font-size: 14px;
-    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{overflow-x:hidden}
+    body{background:var(--forest);color:var(--cream);font-family:'Instrument Sans',system-ui,sans-serif;min-height:100vh;position:relative;overflow-x:hidden}
+    a{color:var(--lgreen)}a:hover{color:#b4d9ad}
+    .rings{position:absolute;top:-450px;right:-450px;pointer-events:none;z-index:0}
+    .rings circle{fill:none;stroke:var(--green);stroke-width:1.2}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+    header{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:30px 44px}
+    .brand{display:flex;align-items:center;gap:14px;text-decoration:none}
+    .brand img{width:44px;height:44px;border-radius:12px;display:block}
+    .brand span{font:400 26px 'DM Serif Display',serif;color:var(--cream)}
+    .btn{padding:11px 22px;border-radius:999px;background:var(--green);color:#0d1a10;font:600 14px 'Instrument Sans',sans-serif;text-decoration:none}
+    .btn:hover{background:var(--lgreen);color:#0d1a10}
+    main{position:relative;z-index:2;max-width:720px;margin:0 auto;padding:48px 24px 96px;animation:fadeUp .8s cubic-bezier(.2,.7,.2,1) both}
+    h1{font:400 46px/1.1 'DM Serif Display',serif;margin-bottom:8px}
+    .updated{display:block;font:400 14px 'Instrument Sans',sans-serif;color:var(--faint);margin-bottom:36px}
+    .intro{font:400 18px/1.7 'Instrument Sans',sans-serif;color:var(--dim);padding-bottom:32px;margin-bottom:36px;border-bottom:1px solid var(--line)}
+    section{margin-bottom:32px}
+    h2{font:400 24px 'DM Serif Display',serif;color:var(--lgreen);margin-bottom:10px}
+    h3{font:600 15px 'Instrument Sans',sans-serif;color:var(--cream);margin:18px 0 8px}
+    p{font:400 16.5px/1.7 'Instrument Sans',sans-serif;color:var(--dim);margin-bottom:12px}
+    ul{list-style:none;margin:4px 0 12px}
+    li{font:400 16.5px/1.7 'Instrument Sans',sans-serif;color:var(--dim);padding:5px 0 5px 20px;position:relative}
+    li::before{content:'—';position:absolute;left:0;color:var(--green)}
+    li strong{color:var(--cream)}
+    .contact-box{background:rgba(90,153,87,.1);border:1px solid rgba(90,153,87,.3);border-radius:16px;padding:22px 26px;margin-top:12px}
+    .sign-off{text-align:center;margin-top:48px;font-style:italic;color:rgba(143,196,135,.45);font-size:15px}
+    footer{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px;padding:26px}
+    .footer-links{display:flex;gap:28px}
+    .footer-links a{font:400 13px 'Instrument Sans',sans-serif;color:var(--faint);text-decoration:none}
+    .footer-links a:hover{color:var(--cream)}
+    .copyright{font:400 11px 'Instrument Sans',sans-serif;color:rgba(238,243,236,.3);letter-spacing:1px}
+    @media (max-width:560px){header{padding:22px 24px}h1{font-size:38px}}
   </style>
 </head>
 <body>
-  <main class="wrap">
+  <svg class="rings" width="900" height="900" viewBox="0 0 900 900" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="450" cy="450" r="160" stroke-opacity="0.28"/>
+    <circle cx="450" cy="450" r="260" stroke-opacity="0.2"/>
+    <circle cx="450" cy="450" r="360" stroke-opacity="0.13"/>
+    <circle cx="450" cy="450" r="445" stroke-opacity="0.07"/>
+  </svg>
+  <header>
+    <a href="/" class="brand"><img src="../favicon.svg" alt="RunThink logo"/><span>RunThink</span></a>
+    <a class="btn" href="/">Get the app</a>
+  </header>
+  <main>
     <h1>Privacy Policy</h1>
-    <p class="updated">Last updated: July 2026</p>
-
+    <span class="updated">Last updated: July 2026</span>
     <p class="intro">RunThink ("we", "us", or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you use the RunThink app.</p>
 
-    <h2>1. Information We Collect</h2>
-    <p>We collect the following information when you create an account and use RunThink:</p>
-    <ul>
-      <li><strong>Account information:</strong> Your first name, last initial, email address, and password.</li>
-      <li><strong>Activity type:</strong> Whether you identify as a runner, walker, roller, cyclist, swimmer, or golfer.</li>
-      <li><strong>Forum posts and journal entries:</strong> Any content you submit to the RunThink community forum or your private journal.</li>
-      <li><strong>Feedback:</strong> Any messages you send through the in-app feedback form.</li>
-      <li><strong>Usage data:</strong> App usage information such as your last active date, app open frequency, and in-app actions like creating a post or enabling reminders. We use this only to understand how RunThink is used and to improve the app.</li>
-      <li><strong>Apple Health data (optional):</strong> If you grant access to Apple Health, we read your recent workout data including activity types, distances, and durations.</li>
-      <li><strong>Wellbeing check-in responses:</strong> Periodic, optional self-reported answers to a short question about how often you feel stuck in your own head, used to understand community wellbeing over time.</li>
-      <li><strong>Purchase and subscription data:</strong> If you subscribe to RunThink Premium, we and our payment processor RevenueCat process your subscription status, purchase history, and renewal date to grant access to premium features.</li>
-    </ul>
+    <section>
+      <h2>1. Information We Collect</h2>
+      <p>We collect the following information when you create an account and use RunThink:</p>
+      <ul>
+        <li><strong>Account information:</strong> your first name, last initial, email address, and password.</li>
+        <li><strong>Activity type:</strong> whether you identify as a runner, walker, roller, cyclist, swimmer, or golfer.</li>
+        <li><strong>Forum posts and journal entries:</strong> any content you submit to the RunThink community forum or your private journal.</li>
+        <li><strong>Feedback:</strong> any messages you send through the in-app feedback form.</li>
+        <li><strong>Usage data:</strong> app usage information such as your last active date, app open frequency, and in-app actions like creating a post or enabling reminders. We use this only to understand how RunThink is used and to improve the app.</li>
+        <li><strong>Apple Health data (optional):</strong> if you grant access to Apple Health, we read your recent workout data including activity types, distances, and durations.</li>
+        <li><strong>Wellbeing check-in responses:</strong> periodic, optional self-reported answers to a short question about how often you feel stuck in your own head, used to understand community wellbeing over time.</li>
+        <li><strong>Purchase and subscription data:</strong> if you subscribe to RunThink Premium, we and our payment processor RevenueCat process your subscription status, purchase history, and renewal date to grant access to premium features.</li>
+      </ul>
+    </section>
 
-    <h2>2. How We Use Your Information</h2>
-    <p>We use your information to:</p>
-    <ul>
-      <li>Provide and personalize the RunThink experience</li>
-      <li>Display your name and activity type in the community forum</li>
-      <li>Show activity stats alongside your forum posts (if you attach a workout)</li>
-      <li>Send you push notifications and app updates you have opted into</li>
-      <li>Review feedback and reported content to keep the community safe</li>
-      <li>Improve the app based on usage patterns</li>
-      <li>Grant access to features you've purchased, such as RunThink Premium</li>
-    </ul>
+    <section>
+      <h2>2. How We Use Your Information</h2>
+      <p>We use your information to:</p>
+      <ul>
+        <li>Provide and personalize the RunThink experience</li>
+        <li>Display your name and activity type in the community forum</li>
+        <li>Show activity stats alongside your forum posts (if you attach a workout)</li>
+        <li>Send you push notifications and app updates you have opted into</li>
+        <li>Review feedback and reported content to keep the community safe</li>
+        <li>Improve the app based on usage patterns</li>
+        <li>Grant access to features you've purchased, such as RunThink Premium</li>
+      </ul>
+    </section>
 
-    <h2>3. Data Storage</h2>
-    <p>Your data is stored securely using Supabase, a trusted cloud database provider. All data is encrypted in transit and at rest. We do not store your full last name — only your last initial is used for community display purposes.</p>
-    <p>Journal entries marked as private are stored with row-level security and are only accessible by you. No other users, including administrators, can view your private journal entries.</p>
+    <section>
+      <h2>3. Data Storage</h2>
+      <p>Your data is stored securely using Supabase, a trusted cloud database provider, on servers located in the United States. All data is encrypted in transit and at rest. We do not store your full last name — only your last initial is used for community display purposes.</p>
+      <p>Journal entries marked as private are stored with row-level security and are only accessible by you. No other users, including administrators, can view your private journal entries.</p>
+    </section>
 
-    <h2>4. Apple Health Data</h2>
-    <p>If you grant RunThink access to Apple Health:</p>
-    <ul>
-      <li>We read your recent workout data (type, distance, duration) on your device solely so you can attach a workout to your posts</li>
-      <li>Health data stays on your device — we only store the details of a workout you explicitly attach to a post</li>
-      <li>We do not sell, share, or use your health data for any other purpose</li>
-      <li>You can revoke access at any time in your iPhone's Settings under Privacy &amp; Security → Health</li>
-      <li>RunThink is not affiliated with or endorsed by Apple Inc.</li>
-    </ul>
+    <section>
+      <h2>4. Apple Health Data</h2>
+      <p>If you grant RunThink access to Apple Health:</p>
+      <ul>
+        <li>We read your recent workout data (type, distance, duration) on your device solely so you can attach a workout to your posts</li>
+        <li>Health data stays on your device — we only store the details of a workout you explicitly attach to a post</li>
+        <li>We do not sell, share, or use your health data for any other purpose</li>
+        <li>You can revoke access at any time in your iPhone's Settings under Privacy &amp; Security → Health</li>
+        <li>RunThink is not affiliated with or endorsed by Apple Inc.</li>
+      </ul>
+    </section>
 
-    <h2>5. Wellbeing Check-In Data</h2>
-    <p>From time to time, RunThink asks a short, optional question — "How often do you feel stuck inside your own head?" — to help us understand how our community is doing over time.</p>
-    <ul>
-      <li>Answering is always optional; you can defer and answer another time, or skip it entirely</li>
-      <li>Each response is stored with your account and the date it was given so we can track change over time — it is never shown to other users or displayed publicly</li>
-      <li>This data is used only for internal, aggregate wellbeing insights and to improve RunThink's content and features</li>
-      <li>You can request deletion of this data at any time by contacting us</li>
-    </ul>
+    <section>
+      <h2>5. Wellbeing Check-In Data</h2>
+      <p>From time to time, RunThink asks a short, optional question — "How often do you feel stuck inside your own head?" — to help us understand how our community is doing over time.</p>
+      <ul>
+        <li>Answering is always optional; you can defer and answer another time, or skip it entirely</li>
+        <li>Each response is stored with your account and the date it was given so we can track change over time — it is never shown to other users or displayed publicly</li>
+        <li>This data is used only for internal, aggregate wellbeing insights and to improve RunThink's content and features</li>
+        <li>You can request deletion of this data at any time by contacting us</li>
+      </ul>
+    </section>
 
-    <h2>6. Email Communications</h2>
-    <p>By creating an account, you may receive transactional emails from RunThink such as password resets and account confirmations. Your email is managed through Mailchimp and Resend. You may unsubscribe from marketing emails at any time using the link at the bottom of any email. We will never sell your email address to third parties.</p>
+    <section>
+      <h2>6. Email Communications</h2>
+      <p>By creating an account, you may receive transactional emails from RunThink such as password resets and account confirmations. Your email is managed through Mailchimp and Resend. You may unsubscribe from marketing emails at any time using the link at the bottom of any email. We will never sell your email address to third parties.</p>
+    </section>
 
-    <h2>7. Data Sharing</h2>
-    <p>We do not sell, trade, or rent your personal information to third parties. We may share data with trusted service providers (Supabase, Mailchimp, Resend, RevenueCat, and Apple) solely for the purpose of operating the app and processing subscription payments. We may disclose information if required by law.</p>
+    <section>
+      <h2>7. Data Sharing</h2>
+      <p>We do not sell, trade, or rent your personal information to third parties. We may share data with trusted service providers (Supabase, Mailchimp, Resend, RevenueCat, and Apple) solely for the purpose of operating the app and processing subscription payments. We may disclose information if required by law.</p>
+    </section>
 
-    <h2>8. Push Notifications</h2>
-    <p>If you enable push notifications, we store your device push token to deliver notifications such as daily reminders, rabbit alerts, and reply alerts. You can disable notifications at any time from your profile settings or your device settings. We use Expo's push notification service to deliver notifications.</p>
+    <section>
+      <h2>8. Push Notifications</h2>
+      <p>If you enable push notifications, we store your device push token to deliver notifications such as daily reminders, rabbit alerts, and reply alerts. You can disable notifications at any time from your profile settings or your device settings. We use Expo's push notification service to deliver notifications.</p>
+    </section>
 
-    <h2>9. Your Rights</h2>
-    <p>Depending on your location, you may have the right to:</p>
-    <ul>
-      <li>Access the personal data we hold about you</li>
-      <li>Request correction of inaccurate data</li>
-      <li>Request deletion of your account and associated data</li>
-      <li>Opt out of marketing communications</li>
-    </ul>
-    <p>To exercise any of these rights, contact us at <a href="mailto:hello@runthink.app">hello@runthink.app</a>.</p>
+    <section>
+      <h2>9. Your Rights</h2>
+      <p>Depending on your location, you may have the right to:</p>
+      <ul>
+        <li>Access the personal data we hold about you</li>
+        <li>Request correction of inaccurate data</li>
+        <li>Request deletion of your account and associated data</li>
+        <li>Opt out of marketing communications</li>
+      </ul>
+      <p>To exercise any of these rights, contact us at <a href="mailto:hello@runthink.app">hello@runthink.app</a>.</p>
+    </section>
 
-    <h2>10. International Users</h2>
-    <p>RunThink is operated from the United States. If you are accessing the app from outside the US, please be aware that your data may be transferred to and processed in the United States. By using the app, you consent to this transfer.</p>
-    <p>If you are located in the European Economic Area (EEA), you have additional rights under the General Data Protection Regulation (GDPR). Please contact us for more information.</p>
+    <section>
+      <h2>10. International Users &amp; EEA/UK Rights</h2>
+      <p>RunThink is operated from the United States, and the servers that store your data (Supabase) are also located in the United States. If you use RunThink from outside the US, your information will be transferred to, and processed in, the US, which may not have the same data protection laws as your home country. By using the app, you consent to this transfer.</p>
 
-    <h2>11. Children's Privacy</h2>
-    <p>RunThink is not intended for children under the age of 13. We do not knowingly collect personal information from children under 13. If we become aware that a child under 13 has provided us with personal information, we will delete it immediately.</p>
+      <h3>If you are in the European Economic Area, the United Kingdom, or Switzerland</h3>
+      <p>You have rights under the General Data Protection Regulation (GDPR) and, where applicable, the UK GDPR. In addition to the rights listed in Section 9, you have the right to:</p>
+      <ul>
+        <li><strong>Restrict processing</strong> of your data in certain circumstances</li>
+        <li><strong>Data portability</strong> — receive a copy of your data in a structured, machine-readable format</li>
+        <li><strong>Object to processing</strong> based on our legitimate interests, including for analytics</li>
+        <li><strong>Withdraw consent</strong> at any time, where we rely on consent (for example, Apple Health access or the optional wellbeing check-in)</li>
+        <li><strong>Lodge a complaint</strong> with your local data protection supervisory authority — for example, the Irish Data Protection Commission if you are in Ireland — if you believe we have not handled your data properly</li>
+      </ul>
 
-    <h2>12. Changes to This Policy</h2>
-    <p>We may update this Privacy Policy from time to time. We will notify you of any significant changes by updating the date at the top of this page. Continued use of the app after changes constitutes acceptance of the updated policy.</p>
+      <h3>Our legal basis for processing</h3>
+      <ul>
+        <li><strong>Contract:</strong> account information and subscription data, needed to provide the app and RunThink Premium</li>
+        <li><strong>Consent:</strong> Apple Health access, wellbeing check-in responses, and marketing emails — each requires your explicit opt-in and can be withdrawn at any time</li>
+        <li><strong>Legitimate interest:</strong> usage data and feedback review, used to keep the app working and the community safe</li>
+      </ul>
 
-    <h2>13. Contact Us</h2>
-    <p>If you have any questions about this Privacy Policy, please contact us at:</p>
-    <p><a href="mailto:hello@runthink.app">hello@runthink.app</a></p>
+      <h3>How long we keep your data</h3>
+      <p>We retain your account data for as long as your account remains active. If you delete your account, we delete your personal data within a reasonable period afterward, except where we're required to keep certain records by law.</p>
+    </section>
 
-    <hr class="divider" />
-    <p class="footer">Hey, hey what a day. 🌄</p>
+    <section>
+      <h2>11. Children's Privacy</h2>
+      <p>RunThink is not intended for children under the age of 13. We do not knowingly collect personal information from children under 13. If we become aware that a child under 13 has provided us with personal information, we will delete it immediately.</p>
+    </section>
+
+    <section>
+      <h2>12. Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time. We will notify you of any significant changes by updating the date at the top of this page. Continued use of the app after changes constitutes acceptance of the updated policy.</p>
+    </section>
+
+    <section>
+      <h2>13. Contact Us</h2>
+      <div class="contact-box">
+        <p style="margin-bottom:8px">If you have any questions about this Privacy Policy, please contact us at:</p>
+        <p style="margin:0"><a href="mailto:hello@runthink.app">hello@runthink.app</a></p>
+      </div>
+    </section>
+
+    <p class="sign-off">Hey, hey what a day. 🌄</p>
   </main>
+  <footer>
+    <div class="footer-links">
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="/support">Support</a>
+      <a href="/weather">Weather</a>
+    </div>
+    <span class="copyright">© 2026 Hey Hey What A Day LLC</span>
+  </footer>
 </body>
 </html>
