@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RunThink for Android — Get Notified</title>
+  <meta name="description" content="RunThink is on iOS today. Leave your email and we'll let you know the moment an Android version is available."/>
+  <link rel="canonical" href="https://runthink.app/android"/>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg"/>
+  <meta property="og:title" content="RunThink for Android — Get Notified"/>
+  <meta property="og:description" content="RunThink is on iOS today. Leave your email and we'll let you know the moment an Android version is available."/>
+  <meta property="og:image" content="https://runthink.app/og-image.png"/>
+  <meta property="og:url" content="https://runthink.app/android"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --forest:#0b160d;--cream:#eef3ec;--green:#5a9957;--lgreen:#8fc487;
+      --dim:rgba(238,243,236,.72);--faint:rgba(238,243,236,.45);--line:rgba(238,243,236,.12);
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{overflow-x:hidden}
+    body{background:var(--forest);color:var(--cream);font-family:'Instrument Sans',system-ui,sans-serif;min-height:100vh;position:relative;overflow-x:hidden}
+    a{color:var(--lgreen)}a:hover{color:#b4d9ad}
+    .rings{position:absolute;top:-450px;right:-450px;pointer-events:none;z-index:0}
+    .rings circle{fill:none;stroke:var(--green);stroke-width:1.2}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+    header{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:30px 44px}
+    .brand{display:flex;align-items:center;gap:14px;text-decoration:none}
+    .brand img{width:44px;height:44px;border-radius:12px;display:block}
+    .brand span{font:400 26px 'DM Serif Display',serif;color:var(--cream)}
+    .btn{padding:11px 22px;border-radius:999px;background:var(--green);color:#0d1a10;font:600 14px 'Instrument Sans',sans-serif;text-decoration:none;border:none;cursor:pointer}
+    .btn:hover{background:var(--lgreen);color:#0d1a10}
+    .btn:disabled{opacity:.6;cursor:default}
+    main{position:relative;z-index:2;max-width:620px;margin:0 auto;padding:56px 24px 96px;animation:fadeUp .8s cubic-bezier(.2,.7,.2,1) both;text-align:center}
+    .eyebrow{display:inline-block;font:600 12px 'Instrument Sans',sans-serif;letter-spacing:2px;text-transform:uppercase;color:var(--lgreen);background:rgba(90,153,87,.12);border:1px solid rgba(90,153,87,.3);border-radius:999px;padding:7px 16px;margin-bottom:24px}
+    h1{font:400 44px/1.15 'DM Serif Display',serif;margin-bottom:16px}
+    h1 em{font-style:italic;color:var(--lgreen)}
+    .intro{font:400 17px/1.7 'Instrument Sans',sans-serif;color:var(--dim);max-width:480px;margin:0 auto 40px}
+    form{display:flex;gap:10px;max-width:420px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+    input[type="email"]{flex:1 1 240px;background:rgba(238,243,236,.06);border:1px solid var(--line);border-radius:999px;padding:13px 20px;font:400 15px 'Instrument Sans',sans-serif;color:var(--cream);outline:none}
+    input[type="email"]::placeholder{color:var(--faint)}
+    input[type="email"]:focus{border-color:rgba(143,196,135,.5)}
+    .status{margin-top:16px;font:400 14px 'Instrument Sans',sans-serif;min-height:20px}
+    .status.ok{color:var(--lgreen)}
+    .status.err{color:#e08a8a}
+    .note{margin-top:36px;font:400 13.5px/1.7 'Instrument Sans',sans-serif;color:var(--faint)}
+    .sign-off{text-align:center;margin-top:56px;font-style:italic;color:rgba(143,196,135,.45);font-size:15px}
+    footer{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px;padding:26px}
+    .footer-links{display:flex;gap:28px;flex-wrap:wrap;justify-content:center}
+    .footer-links a{font:400 13px 'Instrument Sans',sans-serif;color:var(--faint);text-decoration:none}
+    .footer-links a:hover{color:var(--cream)}
+    .copyright{font:400 11px 'Instrument Sans',sans-serif;color:rgba(238,243,236,.3);letter-spacing:1px}
+    @media (max-width:560px){header{padding:22px 24px}h1{font-size:34px}form{flex-direction:column}input[type="email"]{width:100%}button[type="submit"]{width:100%}}
+  </style>
+</head>
+<body>
+  <svg class="rings" width="900" height="900" viewBox="0 0 900 900" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="450" cy="450" r="160" stroke-opacity="0.28"/>
+    <circle cx="450" cy="450" r="260" stroke-opacity="0.2"/>
+    <circle cx="450" cy="450" r="360" stroke-opacity="0.13"/>
+    <circle cx="450" cy="450" r="445" stroke-opacity="0.07"/>
+  </svg>
+  <header>
+    <a href="/" class="brand"><img src="../favicon.svg" alt="RunThink logo"/><span>RunThink</span></a>
+    <a class="btn" href="/">Get the app</a>
+  </header>
+  <main>
+    <span class="eyebrow">iOS today · Android — not yet</span>
+    <h1>RunThink on <em>Android</em><br>isn't here yet.</h1>
+    <p class="intro">We're focused on getting RunThink right on iOS first. If you're on Android, leave your email below and we'll reach out the moment that changes — no spam, just the one message when it's real.</p>
+
+    <form id="waitlist-form" novalidate>
+      <input type="email" id="waitlist-email" placeholder="you@email.com" required autocomplete="email" inputmode="email"/>
+      <button type="submit" class="btn" id="waitlist-submit">Notify me</button>
+    </form>
+    <p class="status" id="waitlist-status" role="status" aria-live="polite"></p>
+
+    <p class="note">This just adds you to a private notification list for Android availability — it doesn't sign you up for the RunThink newsletter or create an account.</p>
+
+    <p class="sign-off">Hey, hey what a day. 🌄</p>
+  </main>
+  <footer>
+    <div class="footer-links">
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="/support">Support</a>
+      <a href="/weather">Weather</a>
+      <a href="/android">Android</a>
+    </div>
+    <span class="copyright">© 2026 Hey Hey What A Day LLC</span>
+  </footer>
+
+  <script>
+    const SUPABASE_URL = 'https://necafmfoiwvwxazdaswi.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_ELgCnQLM1E72lzrerjwAVg_kzLnO4yO';
+
+    const form = document.getElementById('waitlist-form');
+    const emailInput = document.getElementById('waitlist-email');
+    const submitBtn = document.getElementById('waitlist-submit');
+    const status = document.getElementById('waitlist-status');
+
+    function setStatus(message, kind){
+      status.textContent = message;
+      status.className = 'status' + (kind ? ' ' + kind : '');
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = emailInput.value.trim();
+      if(!email){ return; }
+
+      submitBtn.disabled = true;
+      setStatus('Adding you…', '');
+
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/android_waitlist`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Prefer': 'return=minimal',
+          },
+          body: JSON.stringify({ email }),
+        });
+
+        if(res.ok){
+          setStatus("You're on the list. We'll email you when Android is ready.", 'ok');
+          form.reset();
+        } else if(res.status === 409){
+          setStatus("You're already on the list — we'll be in touch.", 'ok');
+          form.reset();
+        } else {
+          setStatus('Something went wrong. Please try again in a moment.', 'err');
+        }
+      } catch (err) {
+        setStatus('Could not reach the server. Check your connection and try again.', 'err');
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
