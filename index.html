@@ -82,6 +82,11 @@
       font:600 17px 'Instrument Sans',sans-serif;text-decoration:none;transition:background .15s,border-color .15s}
     .btn-secondary:hover{background:rgba(238,243,236,.08);border-color:rgba(238,243,236,.4);color:var(--cream)}
 
+    /* Shown only inside in-app browsers (Instagram/Facebook), which often refuse
+       to honor the App Store universal link. Revealed by JS below. */
+    .iab-hint{display:none;max-width:340px;text-align:center;
+      font:400 13px/1.6 'Instrument Sans',sans-serif;color:rgba(238,243,236,.55)}
+    .iab-hint strong{color:var(--cream);font-weight:600}
     .news{display:flex;flex-direction:column;align-items:center;gap:10px;animation:fadeUp 1s .9s both}
     .news-row{display:flex;align-items:center;gap:10px}
     .news-row input{width:280px;padding:13px 18px;border-radius:999px;border:1px solid var(--line);
@@ -142,9 +147,13 @@
     <div class="rule"></div>
     <p class="sub">Daily prompts that turn your run into thinking time.</p>
     <div class="cta">
-      <a class="btn-primary" href="https://apps.apple.com/us/app/runthink/id6760133331">Download for iPhone</a>
+      <a class="btn-primary" id="appstore-link" href="https://apps.apple.com/us/app/runthink/id6760133331">Download for iPhone</a>
       <a class="btn-secondary" href="/android">Android Waitlist</a>
     </div>
+    <p class="iab-hint" id="iab-hint">
+      In Instagram's browser? If the button doesn't open the App Store, tap
+      <strong>&#8943;</strong> at the bottom and choose <strong>Open in browser</strong>.
+    </p>
     <div class="news">
       <form class="news-row" id="newsletter-form" novalidate>
         <input type="email" id="newsletter-email" placeholder="Enter your email" required autocomplete="email" inputmode="email"/>
@@ -168,6 +177,27 @@
   </footer>
 
   <script>
+    // Instagram's and Facebook's in-app browsers routinely refuse to honor the
+    // https://apps.apple.com universal link, so tapping the button does nothing.
+    // Custom URL schemes like itms-apps:// are handed to the OS instead of being
+    // handled in-page, which is what actually opens the App Store from a WebView.
+    // Everywhere else (Safari, Messages, desktop) the plain https link is correct,
+    // so only rewrite it when we detect one of those browsers.
+    (function () {
+      const APP_ID = '6760133331';
+      const ua = navigator.userAgent || '';
+      const inAppBrowser = /Instagram|FBAN|FBAV|FB_IAB|FBIOS/i.test(ua);
+      const isIOS = /iPhone|iPad|iPod/i.test(ua)
+        || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+      if (inAppBrowser && isIOS) {
+        const link = document.getElementById('appstore-link');
+        const hint = document.getElementById('iab-hint');
+        if (link) link.href = `itms-apps://apps.apple.com/us/app/runthink/id${APP_ID}`;
+        if (hint) hint.style.display = 'block';
+      }
+    })();
+
     const NEWSLETTER_ENDPOINT = 'https://necafmfoiwvwxazdaswi.supabase.co/functions/v1/newsletter-signup';
 
     const form = document.getElementById('newsletter-form');
