@@ -82,11 +82,17 @@
       font:600 17px 'Instrument Sans',sans-serif;text-decoration:none;transition:background .15s,border-color .15s}
     .btn-secondary:hover{background:rgba(238,243,236,.08);border-color:rgba(238,243,236,.4);color:var(--cream)}
 
-    /* Shown only inside in-app browsers (Instagram/Facebook), which often refuse
-       to honor the App Store universal link. Revealed by JS below. */
-    .iab-hint{display:none;max-width:340px;text-align:center;
-      font:400 13px/1.6 'Instrument Sans',sans-serif;color:rgba(238,243,236,.55)}
-    .iab-hint strong{color:var(--cream);font-weight:600}
+    /* Shown only inside in-app browsers (Instagram/Facebook). Those WebViews block
+       BOTH the apps.apple.com universal link and the itms-apps:// scheme, so the
+       download button is hidden there and replaced with this instruction, rather
+       than showing a control that silently does nothing. Revealed by JS below. */
+    .iab-notice{display:none;max-width:380px;text-align:center;
+      background:rgba(90,153,87,.1);border:1px solid rgba(90,153,87,.35);
+      border-radius:16px;padding:18px 22px}
+    .iab-title{font:600 12px 'Instrument Sans',sans-serif;letter-spacing:1.5px;
+      text-transform:uppercase;color:var(--lgreen);margin:0 0 8px}
+    .iab-body{font:400 15px/1.6 'Instrument Sans',sans-serif;color:var(--cream);margin:0}
+    .iab-body strong{color:var(--lgreen);font-weight:600}
     .news{display:flex;flex-direction:column;align-items:center;gap:10px;animation:fadeUp 1s .9s both}
     .news-row{display:flex;align-items:center;gap:10px}
     .news-row input{width:280px;padding:13px 18px;border-radius:999px;border:1px solid var(--line);
@@ -146,14 +152,17 @@
     <h1>Think better.<br>Move further.</h1>
     <div class="rule"></div>
     <p class="sub">Daily prompts that turn your run into thinking time.</p>
+    <div class="iab-notice" id="iab-notice">
+      <p class="iab-title">One quick step</p>
+      <p class="iab-body">
+        This browser can't open the App Store. Tap <strong>&#8943;</strong> at the
+        bottom of the screen, choose <strong>Open in browser</strong>, then tap Download.
+      </p>
+    </div>
     <div class="cta">
       <a class="btn-primary" id="appstore-link" href="https://apps.apple.com/us/app/runthink/id6760133331">Download for iPhone</a>
       <a class="btn-secondary" href="/android">Android Waitlist</a>
     </div>
-    <p class="iab-hint" id="iab-hint">
-      In Instagram's browser? If the button doesn't open the App Store, tap
-      <strong>&#8943;</strong> at the bottom and choose <strong>Open in browser</strong>.
-    </p>
     <div class="news">
       <form class="news-row" id="newsletter-form" novalidate>
         <input type="email" id="newsletter-email" placeholder="Enter your email" required autocomplete="email" inputmode="email"/>
@@ -184,17 +193,17 @@
     // Everywhere else (Safari, Messages, desktop) the plain https link is correct,
     // so only rewrite it when we detect one of those browsers.
     (function () {
-      const APP_ID = '6760133331';
       const ua = navigator.userAgent || '';
-      const inAppBrowser = /Instagram|FBAN|FBAV|FB_IAB|FBIOS/i.test(ua);
+      const inAppBrowser = /Instagram|FBAN|FBAV|FB_IAB|FBIOS|Line\/|Twitter|Snapchat/i.test(ua);
       const isIOS = /iPhone|iPad|iPod/i.test(ua)
         || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
       if (inAppBrowser && isIOS) {
         const link = document.getElementById('appstore-link');
-        const hint = document.getElementById('iab-hint');
-        if (link) link.href = `itms-apps://apps.apple.com/us/app/runthink/id${APP_ID}`;
-        if (hint) hint.style.display = 'block';
+        const notice = document.getElementById('iab-notice');
+        // Hide the button rather than leave a control that silently fails.
+        if (link) link.style.display = 'none';
+        if (notice) notice.style.display = 'block';
       }
     })();
 
