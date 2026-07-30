@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About — RunThink</title>
+  <meta name="description" content="How RunThink works: monthly themes, weekly focus, one daily question. Built on cognitive behavioral therapy, made for every pace."/>
+  <link rel="canonical" href="https://runthink.app/about"/>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg"/>
+  <meta property="og:title" content="About — RunThink"/>
+  <meta property="og:description" content="Monthly themes, weekly focus, one daily question. Built on cognitive behavioral therapy, made for every pace."/>
+  <meta property="og:image" content="https://runthink.app/og-image.png"/>
+  <meta property="og:url" content="https://runthink.app/about"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --forest:#0b160d;--cream:#eef3ec;--green:#5a9957;--lgreen:#8fc487;
+      --dim:rgba(238,243,236,.72);--faint:rgba(238,243,236,.45);--line:rgba(238,243,236,.12);
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    body{background:var(--forest);color:var(--cream);font-family:'Instrument Sans',system-ui,sans-serif;min-height:100vh;position:relative;overflow-x:hidden}
+    a{color:var(--lgreen)}a:hover{color:#b4d9ad}
+    .rings{position:absolute;top:-450px;right:-450px;pointer-events:none;z-index:0}
+    .rings circle{fill:none;stroke:var(--green);stroke-width:1.2}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+    header{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:30px 44px}
+    .brand{display:flex;align-items:center;gap:14px;text-decoration:none}
+    .brand img{width:44px;height:44px;border-radius:12px;display:block}
+    .brand span{font:400 26px 'DM Serif Display',serif;color:var(--cream)}
+    .btn{padding:11px 22px;border-radius:999px;background:var(--green);color:#0d1a10;font:600 14px 'Instrument Sans',sans-serif;text-decoration:none}
+    .btn:hover{background:var(--lgreen);color:#0d1a10}
+    main{position:relative;z-index:2;max-width:720px;margin:0 auto;padding:48px 24px 96px;animation:fadeUp .8s cubic-bezier(.2,.7,.2,1) both}
+    .eyebrow{display:inline-block;font:600 12px 'Instrument Sans',sans-serif;letter-spacing:.18em;
+      text-transform:uppercase;color:var(--lgreen);margin-bottom:14px}
+    h1{font:400 46px/1.1 'DM Serif Display',serif;margin-bottom:12px}
+    .lede{font:400 17px/1.6 'Instrument Sans',sans-serif;color:var(--dim);margin-bottom:16px}
+    p{font:400 16px/1.7 'Instrument Sans',sans-serif;color:var(--dim)}
+    p+p{margin-top:14px}
+    section{margin-top:52px}
+    h2{font:400 28px 'DM Serif Display',serif;color:var(--lgreen);margin-bottom:14px}
+    h2+p{margin-bottom:22px}
+
+    /* Monthly → weekly → daily, as a nested set of steps */
+    .tiers{display:flex;flex-direction:column;gap:14px}
+    .tier{display:flex;gap:20px;align-items:flex-start;padding:22px 26px;border:1px solid var(--line);
+      border-radius:16px;background:rgba(238,243,236,.03)}
+    .tier-mark{flex-shrink:0;width:52px;font:600 11px 'Instrument Sans',sans-serif;letter-spacing:.16em;
+      text-transform:uppercase;color:var(--lgreen);padding-top:4px}
+    .tier h3{font:400 20px 'DM Serif Display',serif;color:var(--cream);margin-bottom:6px}
+    .tier p{margin:0;font-size:15px}
+    .tier-note{margin-top:18px;font:400 15px/1.7 'Instrument Sans',sans-serif;color:var(--faint)}
+
+    .quote{margin-top:22px;padding:22px 26px;border-left:2px solid var(--green);
+      background:rgba(90,153,87,.08);border-radius:0 14px 14px 0}
+    .quote p{margin:0;font:400 17px/1.6 'Instrument Sans',sans-serif;color:var(--cream)}
+    .quote .attrib{margin-top:8px;font:400 13px 'Instrument Sans',sans-serif;color:var(--faint)}
+
+    .chain{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+    .link{padding:18px 20px;border:1px solid var(--line);border-radius:14px;background:rgba(238,243,236,.03);text-align:center}
+    .link-label{display:block;font:600 11px 'Instrument Sans',sans-serif;letter-spacing:.16em;
+      text-transform:uppercase;color:var(--lgreen);margin-bottom:8px}
+    .link-body{font:400 14px/1.5 'Instrument Sans',sans-serif;color:var(--dim)}
+
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+    .card{padding:18px 22px;border:1px solid var(--line);border-radius:14px;background:rgba(238,243,236,.03)}
+    .card strong{display:block;font:600 15px 'Instrument Sans',sans-serif;color:var(--cream);margin-bottom:5px}
+    .card span{font:400 14px/1.55 'Instrument Sans',sans-serif;color:var(--dim)}
+
+    /* The current month's theme leads the grid, full width */
+    .card-lead{grid-column:1 / -1;padding:24px 26px;
+      background:rgba(90,153,87,.1);border-color:rgba(90,153,87,.35)}
+    .card-lead .card-mark{display:block;font:600 11px 'Instrument Sans',sans-serif;
+      letter-spacing:.16em;text-transform:uppercase;color:var(--lgreen);margin-bottom:10px}
+    .card-lead strong{font:400 22px 'DM Serif Display',serif;margin-bottom:8px}
+    .card-lead span{font-size:15px;line-height:1.65}
+
+    .disclaimer{margin-top:22px;padding:20px 24px;border:1px solid rgba(90,153,87,.3);
+      background:rgba(90,153,87,.1);border-radius:16px}
+    .disclaimer p{margin:0;font-size:15px;color:var(--cream)}
+
+    .closing{margin-top:56px;padding-top:36px;border-top:1px solid var(--line);text-align:center}
+    .closing h2{margin-bottom:10px}
+    .closing p{margin-bottom:24px}
+    .closing .btn{padding:15px 30px;font-size:16px}
+
+    footer{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px;padding:26px}
+    .footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 28px}
+    .footer-links a{font:400 13px 'Instrument Sans',sans-serif;color:var(--faint);text-decoration:none}
+    .footer-links a:hover{color:var(--cream)}
+    .copyright{font:400 11px 'Instrument Sans',sans-serif;color:rgba(238,243,236,.3);letter-spacing:1px}
+
+    @media (max-width:560px){
+      header{padding:22px 24px}
+      h1{font-size:38px}
+      .grid,.chain{grid-template-columns:1fr}
+      .tier{flex-direction:column;gap:8px}
+      .tier-mark{width:auto;padding-top:0}
+    }
+    @media (prefers-reduced-motion:reduce){main{animation:none}}
+  </style>
+</head>
+<body>
+  <svg class="rings" width="900" height="900" viewBox="0 0 900 900" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="450" cy="450" r="160" stroke-opacity="0.28"/>
+    <circle cx="450" cy="450" r="260" stroke-opacity="0.2"/>
+    <circle cx="450" cy="450" r="360" stroke-opacity="0.13"/>
+    <circle cx="450" cy="450" r="445" stroke-opacity="0.07"/>
+  </svg>
+
+  <header>
+    <a href="/" class="brand"><img src="../favicon.svg" alt="RunThink logo"/><span>RunThink</span></a>
+    <a class="btn" href="/">Get the app</a>
+  </header>
+
+  <main>
+    <span class="eyebrow">About RunThink</span>
+    <h1>You're already moving.<br>You may as well think.</h1>
+    <p class="lede">RunThink turns the time you already spend moving into structured thinking time. One question a day, arriving before you head out, building toward something over the course of a month.</p>
+    <p>Most of us do our best thinking in motion. The problem is that the thinking is unguided. It's the same three worries on a loop, mile after mile. RunThink gives that time a direction. You don't have to journal for an hour or sit still with your eyes closed. You just have to go, and take one question with you.</p>
+
+    <section>
+      <h2>How the system works</h2>
+      <p>Three layers, nested. The month sets the direction, the week narrows it, the day gives you something you can actually carry on a run.</p>
+
+      <div class="tiers">
+        <div class="tier">
+          <span class="tier-mark">Month</span>
+          <div>
+            <h3>A theme</h3>
+            <p>Every month opens on a single theme: self-talk, fear, comparison, patience. Big enough to be worth a month, specific enough to notice in your own life. It's the through-line for everything that follows.</p>
+          </div>
+        </div>
+        <div class="tier">
+          <span class="tier-mark">Week</span>
+          <div>
+            <h3>A focus</h3>
+            <p>The theme breaks into four weekly focuses, each one an angle on it. If the month is self-talk, one week might look at the voice you use when you fail, another at what you say to yourself in the last mile.</p>
+          </div>
+        </div>
+        <div class="tier">
+          <span class="tier-mark">Day</span>
+          <div>
+            <h3>A question</h3>
+            <p>Each morning you get one question inside that week's focus. Think it through while you move. When you're done, write what came up in your private journal, or share it with the forum and read what everyone else found.</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="tier-note">The layering is the point. A single good question is a nice moment; thirty of them pointed at the same thing is how something actually shifts. Miss a day and nothing breaks. The theme is still there tomorrow.</p>
+    </section>
+
+    <section>
+      <h2>Built on CBT</h2>
+      <p>The questions aren't generated at random. They're built on cognitive behavioral therapy, the most studied framework in modern psychology and the one most of us have never been walked through.</p>
+
+      <div class="quote">
+        <p>Thoughts drive feelings. Feelings drive actions. Change the thought and the rest follows.</p>
+        <span class="attrib">The core of CBT, in one line.</span>
+      </div>
+
+      <p>CBT works by noticing a thought, examining whether it's actually true, and choosing a more accurate one. That's it. And it's exactly the sort of work a long run is good for. You have the time. You have no screen. You're already in your own head.</p>
+
+      <div class="chain">
+        <div class="link">
+          <span class="link-label">Notice</span>
+          <span class="link-body">Catch the thought you didn't know you were having.</span>
+        </div>
+        <div class="link">
+          <span class="link-label">Examine</span>
+          <span class="link-body">Ask what the evidence for it actually is.</span>
+        </div>
+        <div class="link">
+          <span class="link-label">Reframe</span>
+          <span class="link-body">Replace it with something truer and more useful.</span>
+        </div>
+      </div>
+
+      <p>Every daily question moves you through some part of that loop. Over a month, the loop starts running on its own, which is the whole goal. You shouldn't need the app to think clearly. You should need it until you don't.</p>
+
+      <div class="disclaimer">
+        <p>RunThink is CBT-informed self-reflection, not therapy. It isn't a substitute for care from a licensed professional, and it isn't crisis support. If you're struggling, please reach out to someone who can help.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Meant for everyone</h2>
+      <p>There is no pace requirement, no minimum distance, no leaderboard. It's for runners, walkers, rollers, cyclists, swimmers, golfers, and anyone else who moves and thinks at the same time. A twenty-minute walk around the block counts exactly as much as a twenty-mile long run, because the question is the same and so is the thinking.</p>
+      <p>You don't need to be an athlete, and you don't need to have anything wrong with you. The questions are written for a person, not a demographic. No jargon, no assumed background in psychology, nothing that requires you to already be someone who journals.</p>
+    </section>
+
+    <section>
+      <h2>The thinking we're shaping</h2>
+      <p>Every theme is a way of thinking we want to make stronger and more available to you, so it's there on the day you need it.</p>
+      <div class="grid">
+        <div class="card card-lead">
+          <span class="card-mark">August theme</span>
+          <strong>Trying something new</strong>
+          <span>The thinking that gets you to start before you feel ready. How you decide something is worth attempting, what you make of being a beginner at it, and what you tell yourself the first time it goes badly. Most of what people want is on the other side of one unfamiliar thing they keep not doing.</span>
+        </div>
+        <div class="card">
+          <strong>Getting somewhere with a hard thought</strong>
+          <span>Turning the third replay of a conversation into an actual conclusion, instead of a fourth replay.</span>
+        </div>
+        <div class="card">
+          <strong>The voice you use on yourself</strong>
+          <span>Speaking to yourself like someone who is on your side and still tells you the truth.</span>
+        </div>
+        <div class="card">
+          <strong>Starting again after a gap</strong>
+          <span>Treating a missed week as a missed week, and picking the thing back up without a verdict attached.</span>
+        </div>
+        <div class="card">
+          <strong>Sizing up what's likely</strong>
+          <span>Giving the probable outcome as much attention as the worst one, and knowing the difference.</span>
+        </div>
+        <div class="card">
+          <strong>Measuring by your own line</strong>
+          <span>Judging the day against what you set out to do, not against whoever you happened to see doing it better.</span>
+        </div>
+        <div class="card">
+          <strong>Moving toward the hard thing</strong>
+          <span>Shortening the distance between knowing what needs doing and being underway.</span>
+        </div>
+        <div class="card">
+          <strong>Staying past the interesting part</strong>
+          <span>Continuing when the thing you chose stops feeling like a thing you want, because that stretch is where it's decided.</span>
+        </div>
+        <div class="card">
+          <strong>Noticing what you've done</strong>
+          <span>Letting a finished thing count as finished before you move the line further out.</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="closing">
+      <h2>Think better. Move further.</h2>
+      <p>One question tomorrow morning. Bring it with you.</p>
+      <a class="btn" href="/">Get the app</a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="/about">About</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="/support">Support</a>
+      <a href="/weather">Weather</a>
+      <a href="/android">Android</a>
+    </div>
+    <span class="copyright">© 2026 Hey Hey What A Day LLC</span>
+  </footer>
+</body>
+</html>
