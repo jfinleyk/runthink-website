@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RunThink — Download</title>
+  <meta name="description" content="Download RunThink for iPhone."/>
+  <!-- Unlisted landing page for Instagram traffic. Kept out of search results and
+       deliberately not linked from anywhere else on the site. -->
+  <meta name="robots" content="noindex,nofollow"/>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+
+  <!-- OG / social -->
+  <meta property="og:title" content="RunThink — Think better. Move further."/>
+  <meta property="og:description" content="Daily mindset prompts that turn your run into thinking time. For runners, walkers, rollers &amp; cyclists."/>
+  <meta property="og:image" content="https://runthink.app/og-image.png"/>
+  <meta property="og:url" content="https://runthink.app/ig"/>
+  <meta property="og:type" content="website"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:image" content="https://runthink.app/og-image.png"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --forest:#0b160d;
+      --cream:#eef3ec;
+      --green:#5a9957;
+      --lgreen:#8fc487;
+      --dim:rgba(238,243,236,.62);
+      --faint:rgba(238,243,236,.45);
+      --line:rgba(238,243,236,.22);
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    body{
+      background:var(--forest);color:var(--cream);
+      font-family:'Instrument Sans',system-ui,sans-serif;
+      min-height:100vh;display:flex;flex-direction:column;
+      overflow-x:hidden;position:relative;
+    }
+    a{color:var(--lgreen)}a:hover{color:#b4d9ad}
+
+    /* grain */
+    body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:5;opacity:.5;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E")}
+
+    /* contour rings */
+    .rings{position:fixed;inset:0;width:100%;height:100%;z-index:0;
+      animation:ringBreathe 12s ease-in-out infinite;transform-origin:center 60%}
+    .rings circle{fill:none;stroke:var(--green);stroke-width:1.2}
+    @keyframes drawRing{to{stroke-dashoffset:0}}
+    @keyframes ringBreathe{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+    @keyframes lineGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+    header{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;
+      padding:30px 44px;animation:fadeUp .8s cubic-bezier(.2,.7,.2,1) both}
+    .brand{display:flex;align-items:center;gap:14px;text-decoration:none}
+    .brand img{width:44px;height:44px;border-radius:12px;display:block}
+    .brand span{font:400 26px 'DM Serif Display',serif;color:var(--cream)}
+
+    main{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;align-items:center;
+      justify-content:center;gap:28px;text-align:center;padding:40px 24px}
+    .eyebrow{display:inline-block;font:600 12px 'Instrument Sans',sans-serif;letter-spacing:2px;
+      text-transform:uppercase;color:var(--lgreen);background:rgba(90,153,87,.12);
+      border:1px solid rgba(90,153,87,.3);border-radius:999px;padding:8px 18px;
+      animation:fadeUp 1s cubic-bezier(.2,.7,.2,1) .05s both}
+    h1{font:400 clamp(48px,7.2vw,72px)/1.05 'DM Serif Display',serif;color:var(--cream);
+      animation:fadeUp 1s cubic-bezier(.2,.7,.2,1) .2s both}
+    .rule{width:72px;height:2px;background:var(--green);transform-origin:center;
+      animation:lineGrow 1s cubic-bezier(.2,.7,.2,1) .9s both}
+    .sub{max-width:420px;font:400 19px/1.5 'Instrument Sans',sans-serif;color:var(--dim);
+      animation:fadeUp 1s .5s both}
+    .cta{display:flex;flex-direction:column;align-items:center;gap:14px;width:100%;max-width:340px;
+      animation:fadeUp 1s .7s both}
+    .btn-primary{display:inline-flex;align-items:center;justify-content:center;width:100%;
+      padding:18px 32px;border-radius:999px;
+      background:var(--green);color:#0d1a10;font:600 17px 'Instrument Sans',sans-serif;text-decoration:none;
+      transition:background .15s,opacity .15s;cursor:pointer;-webkit-tap-highlight-color:transparent}
+    .btn-primary:hover{background:var(--lgreen);color:#0d1a10}
+    /* While the Safari hand-off is being attempted the button is dimmed and inert, so a
+       second tap can't fire a second navigation on top of the first. */
+    .btn-primary.is-waiting{opacity:.55;pointer-events:none}
+
+    /* Fallback shown only when the Safari hand-off is attempted and nothing happens.
+       Mirrors the notice on the homepage. Revealed by JS below. */
+    .iab-notice{display:none;max-width:380px;text-align:center;
+      background:rgba(90,153,87,.1);border:1px solid rgba(90,153,87,.35);
+      border-radius:16px;padding:18px 22px;animation:fadeUp .5s both}
+    .iab-title{font:600 12px 'Instrument Sans',sans-serif;letter-spacing:1.5px;
+      text-transform:uppercase;color:var(--lgreen);margin:0 0 8px}
+    .iab-body{font:400 15px/1.6 'Instrument Sans',sans-serif;color:var(--cream);margin:0}
+    .iab-body strong{color:var(--lgreen);font-weight:600}
+
+    footer{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px;
+      padding:26px;animation:fadeUp 1s 1.1s both}
+    .footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 28px}
+    .footer-links a{font:400 13px 'Instrument Sans',sans-serif;color:var(--faint);text-decoration:none}
+    .footer-links a:hover{color:var(--cream)}
+    .copyright{font:400 11px 'Instrument Sans',sans-serif;color:rgba(238,243,236,.3);letter-spacing:1px}
+
+    @media (max-width:560px){
+      header{padding:22px 24px}
+    }
+    @media (prefers-reduced-motion:reduce){
+      .rings,.rings circle,header,.eyebrow,h1,.rule,.sub,.cta,.iab-notice,footer{animation:none}
+      .rings circle{stroke-dashoffset:0}
+    }
+  </style>
+</head>
+<body>
+
+  <svg class="rings" viewBox="0 0 1180 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="590" cy="420" r="130" stroke-opacity="0.5"  stroke-dasharray="817"  stroke-dashoffset="817"  style="animation:drawRing 2.2s ease .2s forwards"/>
+    <circle cx="590" cy="420" r="210" stroke-opacity="0.38" stroke-dasharray="1320" stroke-dashoffset="1320" style="animation:drawRing 2.6s ease .45s forwards"/>
+    <circle cx="590" cy="420" r="300" stroke-opacity="0.28" stroke-dasharray="1885" stroke-dashoffset="1885" style="animation:drawRing 3s ease .7s forwards"/>
+    <circle cx="590" cy="420" r="400" stroke-opacity="0.18" stroke-dasharray="2514" stroke-dashoffset="2514" style="animation:drawRing 3.4s ease .95s forwards"/>
+    <circle cx="590" cy="420" r="510" stroke-opacity="0.1"  stroke-dasharray="3205" stroke-dashoffset="3205" style="animation:drawRing 3.8s ease 1.2s forwards"/>
+  </svg>
+
+  <header>
+    <a href="/" class="brand">
+      <img src="/runthink-icon.png" alt="RunThink logo"/>
+      <span>RunThink</span>
+    </a>
+  </header>
+
+  <main>
+    <span class="eyebrow">Now on the App Store</span>
+    <h1>Think better.<br>Move further.</h1>
+    <div class="rule"></div>
+    <p class="sub">Daily prompts that turn your run into thinking time.</p>
+
+    <div class="cta">
+      <a class="btn-primary" id="appstore-link" href="https://apps.apple.com/us/app/runthink/id6760133331">Download for iPhone</a>
+    </div>
+
+    <div class="iab-notice" id="iab-notice">
+      <p class="iab-title">One quick step</p>
+      <p class="iab-body">
+        This browser won't open the App Store. Tap <strong>&#8943;</strong> at the
+        bottom of the screen, choose <strong>Open in browser</strong>, then tap Download.
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="/about">About</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="/support">Support</a>
+    </div>
+    <span class="copyright">© 2026 Hey Hey What A Day LLC</span>
+  </footer>
+
+  <script>
+    // Instagram's and Facebook's in-app browsers refuse to honor the
+    // https://apps.apple.com universal link, so the plain link is a dead control
+    // in there. The homepage responds by hiding the button outright. This page
+    // instead attempts a hand-off to Safari first, and only falls back to the
+    // manual instruction if that attempt visibly fails.
+    //
+    // The hand-off uses the undocumented x-safari-https:// scheme, which iOS maps
+    // to "open this URL in Safari". It is not a supported API: Apple could drop it
+    // and Instagram may swallow it. That is why the fallback exists and why every
+    // outcome here is at least as good as the homepage's behavior.
+    (function () {
+      var APP_STORE_URL = 'https://apps.apple.com/us/app/runthink/id6760133331';
+      // How long to wait for the app switch before deciding it didn't happen.
+      // Long enough to cover a slow hand-off, short enough not to feel broken.
+      var FALLBACK_MS = 1600;
+
+      var ua = navigator.userAgent || '';
+      var inAppBrowser = /Instagram|FBAN|FBAV|FB_IAB|FBIOS|Line\/|Twitter|Snapchat/i.test(ua);
+      var isIOS = /iPhone|iPad|iPod/i.test(ua)
+        || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+      // Safari, Messages, Chrome and desktop all open the plain link correctly.
+      // Leave the anchor completely alone there.
+      if (!inAppBrowser || !isIOS) return;
+
+      var link = document.getElementById('appstore-link');
+      var notice = document.getElementById('iab-notice');
+      if (!link) return;
+
+      var timer = null;
+
+      function cancelFallback() {
+        // Reaching here means the page was backgrounded, so the hand-off worked and
+        // Safari is now in front. Showing the instruction would only confuse someone
+        // who returns to Instagram later.
+        if (timer) { clearTimeout(timer); timer = null; }
+        link.classList.remove('is-waiting');
+      }
+
+      function showFallback() {
+        timer = null;
+        link.classList.remove('is-waiting');
+        if (notice) notice.style.display = 'block';
+      }
+
+      // Any of these firing means the OS moved away from this WebView.
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) cancelFallback();
+      });
+      window.addEventListener('pagehide', cancelFallback);
+      window.addEventListener('blur', cancelFallback);
+
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        link.classList.add('is-waiting');
+        if (timer) clearTimeout(timer);
+        timer = setTimeout(showFallback, FALLBACK_MS);
+
+        try {
+          window.location.href = 'x-safari-' + APP_STORE_URL;
+        } catch (err) {
+          // An unrecognized scheme can throw rather than no-op. Treat it the same
+          // as silence and surface the instruction immediately.
+          clearTimeout(timer);
+          showFallback();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
