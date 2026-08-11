@@ -192,6 +192,37 @@
   </footer>
 
   <script>
+    const INVITE_CLICK_ENDPOINT = 'https://necafmfoiwvwxazdaswi.supabase.co/functions/v1/invite-click';
+
+    // Invites shared from the app arrive as runthink.app/?ref=<username>. Record
+    // the hit so invite traffic can be told apart from everything else. This is
+    // the last observable step in the chain -- once the visitor taps through to
+    // the App Store, nothing links the eventual install back to the sender.
+    (function () {
+      try {
+        const ref = new URLSearchParams(window.location.search).get('ref');
+        // Matches the username shape the app enforces; anything else is a typo
+        // or a hand-edited URL and is not worth a request.
+        if (!ref || !/^[a-zA-Z0-9_]{3,30}$/.test(ref)) return;
+
+        // Once per tab, so a reload or a back-navigation doesn't inflate counts.
+        if (sessionStorage.getItem('rt_ref_logged') === ref) return;
+        sessionStorage.setItem('rt_ref_logged', ref);
+
+        // keepalive so the request survives the tap straight through to the
+        // App Store, which is the common case on a phone.
+        fetch(INVITE_CLICK_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ref: ref, referrer: document.referrer || null }),
+          keepalive: true,
+        }).catch(function () { /* never surface a logging failure to a visitor */ });
+      } catch (e) {
+        // sessionStorage throws in some private-browsing modes. Measuring a
+        // click must never be the reason the landing page breaks.
+      }
+    })();
+
     // Instagram's and Facebook's in-app browsers routinely refuse to honor the
     // https://apps.apple.com universal link, so tapping the button does nothing.
     // Custom URL schemes like itms-apps:// are handed to the OS instead of being
