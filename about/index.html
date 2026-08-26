@@ -4,14 +4,55 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>About — RunThink</title>
-  <meta name="description" content="How RunThink works: monthly themes, weekly focus, one daily question. Built on cognitive behavioral therapy, made for every pace."/>
-  <link rel="canonical" href="https://runthink.app/about"/>
+  <meta name="description" content="How the RunThink mindfulness app works: monthly themes, weekly focus, one daily CBT-based question, and a community answering it together. Made for every pace."/>
+  <link rel="canonical" href="https://www.runthink.app/about"/>
   <link rel="icon" type="image/svg+xml" href="../favicon.svg"/>
   <meta property="og:title" content="About — RunThink"/>
   <meta property="og:description" content="Monthly themes, weekly focus, one daily question. Built on cognitive behavioral therapy, made for every pace."/>
-  <meta property="og:image" content="https://runthink.app/og-image-v2.png"/>
-  <meta property="og:url" content="https://runthink.app/about"/>
+  <meta property="og:image" content="https://www.runthink.app/og-image-v2.png"/>
+  <meta property="og:url" content="https://www.runthink.app/about"/>
   <meta name="twitter:card" content="summary_large_image"/>
+
+  <!-- Structured data mirroring the visible "Common questions" section below.
+       Answers here must stay word-for-word in sync with the on-page text. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is RunThink?",
+        "acceptedAnswer": { "@type": "Answer", "text": "RunThink is a mindfulness app for people in motion. Each morning it delivers one question, built on cognitive behavioral therapy, to think through while you run, walk, roll, or ride. Afterward you can journal what came up privately or share it with a community answering the same question." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is RunThink free?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. RunThink is free on iPhone. An optional Premium subscription is $4.99 per year." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does RunThink have a community?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Everyone receives the same question each day, so the forum reads like one shared conversation rather than a feed. Sharing is optional. Every question can go to a private journal instead." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I have to be a runner?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. RunThink is for runners, walkers, rollers, cyclists, swimmers, and anyone else who moves and thinks at the same time. There's no pace requirement, no minimum distance, and no leaderboard." }
+      },
+      {
+        "@type": "Question",
+        "name": "How is RunThink different from meditation apps?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Meditation apps ask you to sit still. RunThink uses the movement time you already have, and instead of clearing your mind it gives your mind one structured thing to work on: a monthly theme, narrowed weekly, delivered as one daily question." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is RunThink therapy?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. RunThink is CBT-informed self-reflection, not therapy, and it isn't a substitute for care from a licensed professional or for crisis support." }
+      }
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -76,6 +117,11 @@
       letter-spacing:.16em;text-transform:uppercase;color:var(--lgreen);margin-bottom:10px}
     .card-lead strong{font:400 22px 'DM Serif Display',serif;margin-bottom:8px}
     .card-lead span{font-size:15px;line-height:1.65}
+
+    .faq{display:flex;flex-direction:column;gap:14px}
+    .faq-item{padding:20px 24px;border:1px solid var(--line);border-radius:14px;background:rgba(238,243,236,.03)}
+    .faq-item h3{font:400 19px 'DM Serif Display',serif;color:var(--cream);margin-bottom:7px}
+    .faq-item p{margin:0;font-size:15px}
 
     .disclaimer{margin-top:22px;padding:20px 24px;border:1px solid rgba(90,153,87,.3);
       background:rgba(90,153,87,.1);border-radius:16px}
@@ -192,6 +238,12 @@
     </section>
 
     <section>
+      <h2>A community answering the same question</h2>
+      <p>Because everyone gets the same question on the same day, the forum doesn't work like a feed. It reads like one conversation: what you found on your run this morning, next to what a walker in another city found on the same question. Someone else's answer will regularly unlock the thing you couldn't quite get to.</p>
+      <p>Sharing is always optional. Every question can go to your private journal instead, and plenty of people never post at all. But most mindfulness practice is solitary by default, and the community is what keeps this one from being. Thinking alongside other people, it turns out, is its own kind of practice.</p>
+    </section>
+
+    <section>
       <h2>The thinking we're shaping</h2>
       <p>Every theme is a way of thinking we want to make stronger and more available to you, so it's there on the day you need it.</p>
       <div class="grid">
@@ -231,6 +283,36 @@
         <div class="card">
           <strong>Noticing what you've done</strong>
           <span>Letting a finished thing count as finished before you move the line further out.</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Common questions</h2>
+      <div class="faq">
+        <div class="faq-item">
+          <h3>What is RunThink?</h3>
+          <p>RunThink is a mindfulness app for people in motion. Each morning it delivers one question, built on cognitive behavioral therapy, to think through while you run, walk, roll, or ride. Afterward you can journal what came up privately or share it with a community answering the same question.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Is RunThink free?</h3>
+          <p>Yes. RunThink is free on iPhone. An optional Premium subscription is $4.99 per year.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Does RunThink have a community?</h3>
+          <p>Yes. Everyone receives the same question each day, so the forum reads like one shared conversation rather than a feed. Sharing is optional. Every question can go to a private journal instead.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Do I have to be a runner?</h3>
+          <p>No. RunThink is for runners, walkers, rollers, cyclists, swimmers, and anyone else who moves and thinks at the same time. There's no pace requirement, no minimum distance, and no leaderboard.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How is RunThink different from meditation apps?</h3>
+          <p>Meditation apps ask you to sit still. RunThink uses the movement time you already have, and instead of clearing your mind it gives your mind one structured thing to work on: a monthly theme, narrowed weekly, delivered as one daily question.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Is RunThink therapy?</h3>
+          <p>No. RunThink is CBT-informed self-reflection, not therapy, and it isn't a substitute for care from a licensed professional or for crisis support.</p>
         </div>
       </div>
     </section>

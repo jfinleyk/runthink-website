@@ -1,0 +1,28 @@
+# RunThink
+
+> RunThink is a mindfulness and mental-fitness app for people in motion. Each morning it delivers one question, built on cognitive behavioral therapy (CBT), to think through while you run, walk, roll, or ride. Afterward you can write what came up in a private journal or share it with a community forum where everyone is answering the same question. Free on iPhone, launched on the App Store in August 2026.
+
+## What makes it different
+
+- Mindfulness in motion: no sitting still, no guided audio. It uses exercise time people already have.
+- Structured, not random: each month has a theme (e.g. self-talk, fear, comparison), each week a focus within it, each day one question. Thirty days point at the same skill.
+- CBT-informed: questions walk the notice → examine → reframe loop from cognitive behavioral therapy. It is self-reflection, not therapy, and says so plainly.
+- A community answering together: the forum runs on the same single daily question, so it reads as one shared conversation rather than a feed. Private journaling is always an option.
+- For every pace: runners, walkers, rollers, cyclists, swimmers. No pace requirement, no leaderboards. Accessible by design, including wheelchair users.
+
+## Key facts
+
+- Platform: iOS (iPhone), 13+. Android is in a waitlist stage.
+- Price: free. Optional RunThink Premium subscription is $4.99/year.
+- Category: Health & Fitness / mindfulness / mental fitness.
+- App Store: https://apps.apple.com/us/app/runthink/id6760133331
+- Publisher: Hey Hey What A Day LLC.
+- Available in: US, Canada, UK, Ireland, Australia, New Zealand, Germany.
+
+## Pages
+
+- [Home](https://www.runthink.app/): overview and App Store download.
+- [About](https://www.runthink.app/about): how the monthly theme → weekly focus → daily question system works, the CBT foundation, and the community.
+- [Support](https://www.runthink.app/support): help with accounts, notifications, and the forum.
+- [Android waitlist](https://www.runthink.app/android): email signup for the Android release.
+- [Privacy](https://www.runthink.app/privacy) and [Terms](https://www.runthink.app/terms).

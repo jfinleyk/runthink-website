@@ -3,19 +3,60 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>RunThink — Think better. Move further.</title>
-  <meta name="description" content="RunThink turns your run into thinking time — daily mindset prompts for runners, walkers, rollers &amp; cyclists. Now on the App Store for iPhone."/>
-  <link rel="canonical" href="https://runthink.app"/>
+  <title>RunThink — Mindfulness App for Runners, Walkers &amp; Cyclists</title>
+  <meta name="description" content="A mindfulness app for people in motion. One CBT-based question each morning to think through on your run, walk, or ride, plus a community answering it together. Free on iPhone."/>
+  <link rel="canonical" href="https://www.runthink.app/"/>
   <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
 
   <!-- OG / social -->
   <meta property="og:title" content="RunThink — Think better. Move further."/>
   <meta property="og:description" content="Daily mindset prompts that turn your run into thinking time. For runners, walkers, rollers &amp; cyclists."/>
-  <meta property="og:image" content="https://runthink.app/og-image-v2.png"/>
-  <meta property="og:url" content="https://runthink.app"/>
+  <meta property="og:image" content="https://www.runthink.app/og-image-v2.png"/>
+  <meta property="og:url" content="https://www.runthink.app/"/>
   <meta property="og:type" content="website"/>
   <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:image" content="https://runthink.app/og-image-v2.png"/>
+  <meta name="twitter:image" content="https://www.runthink.app/og-image-v2.png"/>
+
+  <!-- Structured data: tells Google and AI assistants, in a format they parse
+       directly, what RunThink is, that it's free, and where to install it. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "MobileApplication",
+        "@id": "https://www.runthink.app/#app",
+        "name": "RunThink",
+        "description": "A mindfulness app for people in motion. Each morning delivers one question, built on cognitive behavioral therapy, to think through while you run, walk, roll, or ride. Afterward, journal it privately or discuss it with a community answering the same question.",
+        "operatingSystem": "iOS",
+        "applicationCategory": "HealthApplication",
+        "installUrl": "https://apps.apple.com/us/app/runthink/id6760133331",
+        "datePublished": "2026-07-28",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "publisher": { "@id": "https://www.runthink.app/#org" },
+        "sameAs": ["https://apps.apple.com/us/app/runthink/id6760133331"]
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://www.runthink.app/#org",
+        "name": "Hey Hey What A Day LLC",
+        "url": "https://www.runthink.app/",
+        "logo": "https://www.runthink.app/runthink-icon.png"
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.runthink.app/#site",
+        "url": "https://www.runthink.app/",
+        "name": "RunThink",
+        "publisher": { "@id": "https://www.runthink.app/#org" }
+      }
+    ]
+  }
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

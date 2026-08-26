@@ -1,0 +1,7 @@
+# RunThink — https://www.runthink.app
+# All crawlers welcome, including AI assistants.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://www.runthink.app/sitemap.xml
