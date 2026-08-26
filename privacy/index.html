@@ -3,14 +3,30 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <!-- Google Analytics 4 (gtag.js) -->
+  <!-- Google Analytics 4 (gtag.js) with Consent Mode v2 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-P5SSN83L0B"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
+    // Default to no analytics storage until the visitor consents (GDPR). Until
+    // then GA runs cookieless and stores no identifier on the device.
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      wait_for_update: 500
+    });
+    // Honor a choice saved on a previous visit before the tag initializes.
+    try {
+      if (localStorage.getItem('rt-analytics-consent') === 'granted') {
+        gtag('consent', 'update', { analytics_storage: 'granted' });
+      }
+    } catch (e) {}
     gtag('js', new Date());
     gtag('config', 'G-P5SSN83L0B');
   </script>
+  <script defer src="/consent.js"></script>
   <title>Privacy Policy — RunThink</title>
   <meta name="description" content="Privacy policy for the RunThink app."/>
   <link rel="canonical" href="https://www.runthink.app/privacy"/>
@@ -76,7 +92,7 @@
   </header>
   <main>
     <h1>Privacy Policy</h1>
-    <span class="updated">Last updated: July 2026</span>
+    <span class="updated">Last updated: August 2026</span>
     <p class="intro">RunThink ("we", "us", or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you use the RunThink app.</p>
 
     <section>
@@ -190,17 +206,30 @@
     </section>
 
     <section>
-      <h2>11. Children's Privacy</h2>
+      <h2>11. Website Analytics &amp; Cookies</h2>
+      <p>This section covers the RunThink website (runthink.app), separately from the app described above.</p>
+      <p>Our website uses Google Analytics, a service provided by Google LLC, to understand how visitors find and use the site so we can improve it. When enabled, Google Analytics sets cookies and collects information such as the pages you view, how you arrived at the site, your device and browser type, and an approximate location derived from your IP address, which Google processes. We use this information in aggregate to measure traffic. We do not use it to identify you personally, and we do not use Google Analytics inside the app itself.</p>
+      <h3>Your choice</h3>
+      <ul>
+        <li>When you first visit the site, we ask whether you consent to analytics. Until you accept, Google Analytics runs in a restricted mode that sets no cookies and stores no identifier on your device.</li>
+        <li>If you <strong>accept</strong>, analytics cookies are enabled. If you <strong>decline</strong>, they are not, and analytics stays in the restricted mode.</li>
+        <li>You can change your mind at any time by clearing this site's data in your browser, which brings the consent banner back on your next visit.</li>
+      </ul>
+      <p>We rely on your consent as the legal basis for analytics cookies. You can read how Google uses data at <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>, and you can opt out of Google Analytics across all websites using Google's <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">opt-out browser add-on</a>.</p>
+    </section>
+
+    <section>
+      <h2>12. Children's Privacy</h2>
       <p>RunThink is not intended for children under the age of 13. We do not knowingly collect personal information from children under 13. If we become aware that a child under 13 has provided us with personal information, we will delete it immediately.</p>
     </section>
 
     <section>
-      <h2>12. Changes to This Policy</h2>
+      <h2>13. Changes to This Policy</h2>
       <p>We may update this Privacy Policy from time to time. We will notify you of any significant changes by updating the date at the top of this page. Continued use of the app after changes constitutes acceptance of the updated policy.</p>
     </section>
 
     <section>
-      <h2>13. Contact Us</h2>
+      <h2>14. Contact Us</h2>
       <div class="contact-box">
         <p style="margin-bottom:8px">If you have any questions about this Privacy Policy, please contact us at:</p>
         <p style="margin:0"><a href="mailto:hello@runthink.app">hello@runthink.app</a></p>

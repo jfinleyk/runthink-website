@@ -3,14 +3,30 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <!-- Google Analytics 4 (gtag.js) -->
+  <!-- Google Analytics 4 (gtag.js) with Consent Mode v2 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-P5SSN83L0B"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
+    // Default to no analytics storage until the visitor consents (GDPR). Until
+    // then GA runs cookieless and stores no identifier on the device.
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      wait_for_update: 500
+    });
+    // Honor a choice saved on a previous visit before the tag initializes.
+    try {
+      if (localStorage.getItem('rt-analytics-consent') === 'granted') {
+        gtag('consent', 'update', { analytics_storage: 'granted' });
+      }
+    } catch (e) {}
     gtag('js', new Date());
     gtag('config', 'G-P5SSN83L0B');
   </script>
+  <script defer src="/consent.js"></script>
   <title>RunThink — Mindfulness App for Runners, Walkers &amp; Cyclists</title>
   <meta name="description" content="A mindfulness app for people in motion. One CBT-based question each morning to think through on your run, walk, or ride, plus a community answering it together. Free on iPhone."/>
   <link rel="canonical" href="https://www.runthink.app/"/>
