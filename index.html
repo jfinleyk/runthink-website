@@ -236,6 +236,7 @@
     <div class="news">
       <form class="news-row" id="newsletter-form" novalidate>
         <input type="email" id="newsletter-email" placeholder="Enter your email" required autocomplete="email" inputmode="email"/>
+        <input type="text" id="newsletter-hp" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;"/>
         <button type="submit" id="newsletter-submit">Subscribe to newsletter</button>
       </form>
       <p class="news-note" id="newsletter-note">Weekly email with occasional updates. No spam, ever.</p>
@@ -313,10 +314,12 @@
 
     const form = document.getElementById('newsletter-form');
     const emailInput = document.getElementById('newsletter-email');
+    const hpInput = document.getElementById('newsletter-hp');
     const submitBtn = document.getElementById('newsletter-submit');
     const note = document.getElementById('newsletter-note');
     const errorEl = document.getElementById('newsletter-error');
     const successEl = document.getElementById('newsletter-success');
+    const newsletterLoadedAt = Date.now();
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -331,7 +334,11 @@
         const res = await fetch(NEWSLETTER_ENDPOINT, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email }),
+          body: JSON.stringify({
+            email,
+            company: hpInput.value,
+            fillMs: Date.now() - newsletterLoadedAt,
+          }),
         });
 
         if(res.ok){
