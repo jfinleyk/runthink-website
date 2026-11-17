@@ -320,6 +320,8 @@
     const errorEl = document.getElementById('newsletter-error');
     const successEl = document.getElementById('newsletter-success');
     const newsletterLoadedAt = Date.now();
+    const params = new URLSearchParams(location.search);
+    const externalReferrer = document.referrer && new URL(document.referrer).host !== location.host ? document.referrer : '';
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -338,10 +340,16 @@
             email,
             company: hpInput.value,
             fillMs: Date.now() - newsletterLoadedAt,
+            // Where the visitor came from, so Beehiiv shows more than "api-website".
+            utm_source: params.get('utm_source') || '',
+            utm_medium: params.get('utm_medium') || '',
+            utm_campaign: params.get('utm_campaign') || '',
+            referrer: externalReferrer,
           }),
         });
 
         if(res.ok){
+          if (typeof window.gtag === 'function') window.gtag('event', 'generate_lead', { method: 'newsletter' });
           form.style.display = 'none';
           note.style.display = 'none';
           successEl.style.display = 'block';
